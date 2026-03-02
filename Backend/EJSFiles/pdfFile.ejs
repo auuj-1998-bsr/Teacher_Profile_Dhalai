@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      font-family: Arial;
+      font-size: 12px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th,
+    td {
+      border: 1px solid #999;
+      padding: 6px;
+      text-align: center;
+    }
+    th {
+      background: #f2f2f2;
+    }
+    .page {
+      page-break-after: always;
+    }
+  </style>
+</head>
+<body>
+  <% profilereportdata.forEach((row, index)=> { %>
+    <% if (index % 25===0) { %>
+      <% if (index !==0) { %>
+        </tbody>
+        </table>
+        </div>
+        <% } %>
+          <div class="page">
+            <table>
+              <thead>
+                <tr>
+                  <th>Sr.No</th>
+                  <th>School Name</th>
+                  <th>Teacher Name</th>
+                  <th>School Category Code</th>
+                  <th>DOB</th>
+                  <th>Gender</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% } %>
+
+                  <tr>
+                    <td>
+                      <%= index + 1 %>
+                    </td>
+                    <td>
+                      <%= row.school_name %>
+                    </td>
+                    <td>
+                      <%= row.teacher_name %>
+                    </td>
+                    <td>
+                      <%= row.social_category %>
+                    </td>
+                    <td>
+                      <%= row.dob %>
+                    </td>
+                    <td>
+                      <%= row.gender %>
+                    </td>
+                  </tr>
+                  <% }) %>
+              </tbody>
+            </table>
+          </div>
+</body>
+</html>
