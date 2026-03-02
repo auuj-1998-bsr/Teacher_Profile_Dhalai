@@ -55,6 +55,8 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
             return;
         }
 
+        
+
         setImage(file);
 
         const previewUrl = URL.createObjectURL(file);

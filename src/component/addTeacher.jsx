@@ -45,6 +45,7 @@ export default function TeacherForm() {
             <h2 className="text-2xl font-semibold text-gray-800">
                 Teacher Complete Details Form
             </h2>
+
             <Section title="School Details">
                 <Input label="Academic Year" type="date" name="academic_year" value={teacherinfo.academic_year}  onChange={handleChange} />
                 <Input label="UDISE Code" type="text" minLength={11} maxLength={11} name="udise_code" value={teacherinfo.udise_code} onChange={handleChange} />

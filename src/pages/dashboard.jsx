@@ -94,9 +94,9 @@ function Dashboard() {
 
     const handleView = (data) => {
         setRowdata(data);
-        setIsModalOpen(true);
+        setIsModalOpen(prev=>!prev);
     }
-     console.log("hello")
+
 
     return (
         <div className="space-y-6">
@@ -154,7 +154,7 @@ function Dashboard() {
                 </select>
 
                 <h1 className="pl-4 px-3 py-2 text-sm">TotalTeacher:{count}</h1>
-                <button onClick={handleReset} title="reset" className={`hover:text-blue-500 transition pl-0 pr-0 px-3 py-2 cursor-pointer  ${pdfloading ? "animate-spin text-gray-400" : "hover:text-blue-500"}`}><FontAwesomeIcon icon={faArrowRotateLeft} /></button>
+                <button onClick={handleReset} title="reset" className="hover:text-blue-500 transition pl-0 pr-0 px-3 py-2 cursor-pointer "><FontAwesomeIcon icon={faArrowRotateLeft} /></button>
                 <h1 title="Download_Pdf" onClick={!pdfloading ? () => handleTeacherReports("pdf") : null}
                     className={`pl-2 pr-0 px-3 py-2 cursor-pointer transition 
              ${pdfloading ? "animate-spin text-gray-400" : "hover:text-blue-500"}

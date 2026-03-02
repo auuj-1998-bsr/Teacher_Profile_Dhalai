@@ -4,28 +4,30 @@ import { ApiData } from "../services/api";
 
 export default function LoginPage() {
   const [form, setForm] = useState({
+    loginType: "teacher",
     teacher_code: "",
-    password: ""
+    password: "",
   });
 
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
 
-
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
+
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
 
+    if (!form.loginType) {
+      setError("Please select Admin or Teacher");
+      return;
+    }
+console.log("hello");
     try {
-      const res = await ApiData.post("/login", {
-        form
-      });
-      const data = await res.data;
-      console.log(data);
-
+      const res = await ApiData.post("/login", form);
+      const data = res.data;
       if (!res.data) {
         setError(data.message);
       } else {
@@ -33,19 +35,47 @@ export default function LoginPage() {
         window.location.href = "/";
       }
     } catch (err) {
+       if (err.response?.data?.message) {
+    setError(err.response.data.message);
+  } else {
+    setError("Server error");
       setError("Server error");
     }
   }
-  console.log(form);
-  console.log("hello")
+}
 
   return (
-    <div className="min-h-screen bg-gradient from-indigo-500 to-blue-500 flex items-center justify-center">
+    <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
 
-        <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
-          Teacher Login Portal
+        <h2 className="text-2xl font-bold text-center mb-6">
+          Login
         </h2>
+
+        {/* LOGIN TYPE */}
+        <div className="flex justify-center gap-6 mb-5">
+
+          <label>
+            <input
+              type="radio"
+              name="loginType"
+              value="admin"
+              checked={form.loginType === "admin"}
+              onChange={handleChange}
+            /> Admin
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="loginType"
+              value="teacher"
+              checked={form.loginType === "teacher"}
+              onChange={handleChange}
+            /> Teacher
+          </label>
+
+        </div>
 
         {error && (
           <div className="bg-red-100 text-red-700 p-2 mb-4 rounded">
@@ -58,10 +88,10 @@ export default function LoginPage() {
           <input
             type="text"
             name="teacher_code"
-            placeholder="Teacher Code"
+            placeholder={form.loginType === "admin" ? "Admin ID" : "Teacher Code"}
             value={form.teacher_code}
             onChange={handleChange}
-            className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400"
+            className="w-full p-3 border rounded-lg"
             required
           />
 
@@ -72,19 +102,20 @@ export default function LoginPage() {
               placeholder="Password"
               value={form.password}
               onChange={handleChange}
-              className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400"
+              className="w-full p-3 border rounded-lg"
               required
             />
+
             <span
-              onClick={() => setShowPass(!showPass)}
+              onClick={() => setShowPass(prev => !prev)}
               className="absolute right-3 top-3 cursor-pointer"
             >
               {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
             </span>
           </div>
 
-          <button className="w-full bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700">
-            Login
+          <button className="w-full bg-indigo-600 text-white p-3 rounded-lg">
+            Login as {form.loginType}
           </button>
         </form>
       </div>
