@@ -36,13 +36,13 @@
     "react-tooltip": "^5.30.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
+    "@eslint/js": "^9.39.3",
     "@tailwindcss/postcss": "^4.1.18",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
     "autoprefixer": "^10.4.24",
-    "eslint": "^8.57.1",
+    "eslint": "^9.39.3",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "nodemon": "^3.1.11",
