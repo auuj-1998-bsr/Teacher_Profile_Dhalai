@@ -5,7 +5,6 @@ import teacherRoutes from "./routes/teacherRoutes.js";
 const app = express();
 app.use(cors());
 app.use(express.json());
-
 app.use("/uploads", express.static("uploads"));
 const port = 3400;
 

@@ -31,13 +31,13 @@ export const createPdf = async (rowData, res) => {
             displayHeaderFooter: true,
             margin: { top: "80px", bottom: "60px", left: "20px", right: "20px" },
             headerTemplate: `<div style="width:100%; position:relative;font-size:10px; padding:5px 20px;border-bottom:1px solid #ccc;">
-                       <img src="${MOelogobase}"  style="height:50px; width:auto; position:absolute; left:20px; top:5px;" />
+                       <img src="${MOelogobase}"  style="height:50px; width:auto; position:absolute; left:10px; top:1px;" />
                        <div style="text-align:center;font-size:16px;font-weight:bold;width:100%;line-height:50px;">Teacher Data Report</div>
                </div>
 `,
             footerTemplate: `
                    <div style="width:100%;font-size:9px;padding:5px 20px;border-top:1px solid #ccc;display:flex;align-items:center;justify-content:space-between;">
-                           <img src="${Niclogobase}"  style="height:50px; width:auto; position:fix; left:20px; top:5px;" /> 
+                           <img src="${Niclogobase}"  style="height:60px; width:auto; position:fix; left:10px; top:1px;" /> 
                               <span> Generated on: ${new Date().toLocaleString()} </span>
                               <span>Page <span class="pageNumber"></span> of <span class="totalPages"></span></span>
                              </div>`,
