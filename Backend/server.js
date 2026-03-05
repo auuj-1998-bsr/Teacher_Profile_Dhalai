@@ -5,17 +5,19 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 3400;
 app.use(cors({
   origin: "https://your-frontend.vercel.app"
 }));
 app.use(express.json());
 app.use("/uploads", express.static("uploads"));
-const port = 3400;
 
 
 app.use("/", teacherRoutes);
 
 
+
+
 app.listen(port, () => {
-    console.log("Server is running this port 3400...");
-});
+  console.log("Server running on port " + port);
+}); 
