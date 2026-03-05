@@ -1,11 +1,7 @@
 export default {
   development: {
     client: "pg",
-    connection: {
-      host: "localhost",
-      user: "postgres",
-      password: "Anuj",
-      database: "postgres",
-    },
-  },
+    connection: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+  }
 };
