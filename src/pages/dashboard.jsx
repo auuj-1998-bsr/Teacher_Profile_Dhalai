@@ -1,7 +1,7 @@
 import { ApiData } from "../services/api";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRotateLeft, faFilePdf, faFileExcel } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRotateLeft, faFilePdf, faFileExcel,faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { TeacherView } from "../component/teacherView";
 
 
@@ -17,8 +17,9 @@ function Dashboard() {
     const [pdfloading, setPdfLoading] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [rowdata, setRowdata] = useState();
+    const [spin,setSpin]=useState("");
     useEffect(() => {
-        getData()
+        getData();
     }, [page, gender, schooltype, doj, block, udiseCode])
 
     const getData = async () => {
@@ -39,7 +40,6 @@ function Dashboard() {
             console.error(err.message);
         }
     }
-
     //pdf
     const handleTeacherReports = async (type) => {
         setPdfLoading(true);
@@ -80,6 +80,7 @@ function Dashboard() {
         }
         finally {
             setPdfLoading(false);
+            setSpin("")
         }
     }
     const handleReset = () => {
@@ -89,15 +90,13 @@ function Dashboard() {
         setGender("0");
         setBlock("0");
         setUdiseCode("0");
-        console.log("reset")
+        console.log("reset");    
     }
 
     const handleView = (data) => {
         setRowdata(data);
         setIsModalOpen(prev=>!prev);
     }
-
-
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
@@ -116,7 +115,6 @@ function Dashboard() {
                     <option value="2022">2022</option>
                     <option value="2023">2023</option>
                 </select>
-
                 <select className="border rounded px-3 py-2 text-sm" value={udiseCode} onChange={(e) => setUdiseCode(e.target.value)}>
                     <option value="0">UDISE Code</option>
                     <option value="16030302001">16030302001</option>
@@ -124,9 +122,7 @@ function Dashboard() {
                     <option value="16030102504">16030102504</option>
                     <option value="16030105602">16030105602</option>
                     <option value="16030301608">16030301608</option>
-
                 </select>
-
                 <select className="border rounded px-3 py-2 text-sm" value={block} onChange={(e) => setBlock(e.target.value)}>
                     <option value="0">Block</option>
                     <option value="MANU">MANU</option>
@@ -138,13 +134,11 @@ function Dashboard() {
                     <option value="DUMBURNAGAR">DUMBURNAGAR</option>
                     <option value="SHILLONG">SHILLONG</option>
                 </select>
-
                 <select className="border rounded px-3 py-2 text-sm" value="0" onChange={(e) => setGender(e.target.value)}>
                     <option value="0">Gender</option>
                     <option value="1">Male</option>
                     <option value="2">Female</option>
                 </select>
-
                 <select className="border rounded px-3 py-2 text-sm" value={schooltype} onChange={(e) => setSchooltype(e.target.value)}>
                     <option value="0">School Type</option>
                     <option value="1">Primary School</option>
@@ -152,18 +146,16 @@ function Dashboard() {
                     <option value="6">Secondary School</option>
                     <option value="3">Higher Secondary School</option>
                 </select>
-
                 <h1 className="pl-4 px-3 py-2 text-sm">TotalTeacher:{count}</h1>
-                <button onClick={handleReset} title="reset" className="hover:text-blue-500 transition pl-0 pr-0 px-3 py-2 cursor-pointer "><FontAwesomeIcon icon={faArrowRotateLeft} /></button>
-                <h1 title="Download_Pdf" onClick={!pdfloading ? () => handleTeacherReports("pdf") : null}
-                    className={`pl-2 pr-0 px-3 py-2 cursor-pointer transition 
-             ${pdfloading ? "animate-spin text-gray-400" : "hover:text-blue-500"}
-              `}><FontAwesomeIcon icon={faFilePdf} /></h1>
-
-                <h1 title="Download_csv" onClick={!pdfloading ? () => handleTeacherReports("excel") : null}
-                    className={`pl-2 pr-0 px-3 py-2 cursor-pointer transition 
-             ${pdfloading ? "animate-spin text-gray-400" : "hover:text-blue-500"}
-              `}><FontAwesomeIcon icon={faFileExcel} /></h1>
+                <button onClick={!pdfloading ?()=>{handleReset();setSpin("reset")}:null} title="reset" className={`hover:text-blue-500 transition pl-0 pr-0 px-3 py-2 cursor-pointer 
+               ${pdfloading ? "animate-spin text-gray-400" : "hover:text-blue-500"}`}>
+                    <FontAwesomeIcon icon={faArrowRotateLeft} /></button>
+                <h1 title="Download_Pdf" onClick={!pdfloading ? () => handleTeacherReports("pdf")&& setSpin("pdf") : null}
+                    className="pl-2 pr-0 px-3 py-2 cursor-pointer transition">
+                        <FontAwesomeIcon icon={spin==="pdf"?faSpinner:faFilePdf} /></h1>
+                <h1 title="Download_csv" onClick={!pdfloading ? () => handleTeacherReports("excel")&& setSpin("excel") : null}
+                    className="pl-2 pr-0 px-3 py-2 cursor-pointer transition" >
+                        <FontAwesomeIcon icon={spin==="excel"?faSpinner:faFileExcel} /></h1>
             </div>
             <TeacherView
                 rowdata={rowdata}
@@ -201,7 +193,6 @@ function Dashboard() {
                 </table>
             </div>
             <div className="flex justify-end gap-2">
-                
                 <button className="px-3 py-1 border rounded" onClick={() => {
                     if (page > 1) { setPage(page - 1) }
                     else { alert("enter next button") }
