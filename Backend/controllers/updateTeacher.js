@@ -7,7 +7,7 @@ export default async function updateTeacherInfo(req, res) {
     const id=Number(req.body.id);
     try {
         await db("history_profile_master").insert({
-            ...rowUpdate,image:imageName, createdAt: new Date(),
+            ...rowUpdate,image:imageName,
             action: "UPDATE",
         });
         await db("profile_master").where("id", id)

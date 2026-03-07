@@ -15,6 +15,7 @@ export async function getTeacherProfile(req, res) {
         const download = req.body.download;
         const selectTeacherId = Number(req.body.selectTeacherId);
         let baseQuery = db("profile_master").select("*");
+        console.log(block);
         const rowData = baseQuery.where((q) => {
             udiseCode && q.where("udise_code", udiseCode);
             gender && q.where("gender", gender);

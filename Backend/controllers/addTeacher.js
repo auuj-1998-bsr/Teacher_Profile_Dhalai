@@ -1,5 +1,6 @@
 import db from "../database/db.js";
 export default async function addTeacherData(req, res)  {
+    
     try {
         const teacherinfo = req.body.teacherinfo;
         await db("profile_master").insert({
