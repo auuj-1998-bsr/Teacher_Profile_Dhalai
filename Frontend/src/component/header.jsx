@@ -11,7 +11,7 @@ const Header = () => {
   }
   return (
     <header className="h-14 bg-white-400 text-black flex items-center justify-between px-6">
-      <img src="https://your-project.vercel.app/public/MOe_logo.png" className="h-13 w-35" alt="" />
+     <img src={`${import.meta.env.VITE_API_URL}/uploads/MOe_logo.png`}className="h-13 w-35" alt="" />
       <h1 className="text-2xl font-semibold pl-10 ">
        School Teacher Information
       </h1>
