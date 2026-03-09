@@ -12,10 +12,24 @@
 // };
 
 
+const config = {
 
-export default {
-  development: {
-    client: "pg",
-    connection: process.env.DATABASE_URL
+ development: {
+  client: "pg",
+  connection: {
+   host: "127.0.0.1",
+   user: "postgres",
+   password: "postgres",
+   database: "postgres"
   }
+ },
+
+ production: {
+  client: "pg",
+  connection: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
+ }
+
 };
+
+export default config;
