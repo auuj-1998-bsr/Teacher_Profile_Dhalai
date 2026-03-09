@@ -146,7 +146,7 @@ function Dashboard() {
                     <option value="6">Secondary School</option>
                     <option value="3">Higher Secondary School</option>
                 </select>
-                <h1 className="pl-4 px-3 py-2 text-sm">TotalTeacher:{count}</h1>
+                <h1 className="pl-2 px-3 py-2 text-sm">TotalTeacher:{count}</h1>
                 <button onClick={!pdfloading ?()=>{handleReset();setSpin("reset")}:null} title="reset" className={`hover:text-blue-500 transition pl-0 pr-0 px-3 py-2 cursor-pointer 
                ${pdfloading ? "animate-spin text-gray-400" : "hover:text-blue-500"}`}>
                     <FontAwesomeIcon icon={faArrowRotateLeft} /></button>
