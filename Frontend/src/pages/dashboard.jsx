@@ -180,7 +180,7 @@ function Dashboard() {
                     <tbody>
                         {ProfileData.map((teacherData, index) => (
                             <tr key={index} className="border-t hover:bg-gray-300">
-                                <td className="pl-1"><img src={`http://localhost:3400/uploads/${teacherData.image}`} alt="teacher" className="size-12 rounded-full object-cover"/></td>
+                                <td className="pl-1"><img src={`https://teacher-profile-dhalai.onrender.com/uploads/${teacherData.image}`} alt="teacher" className="size-12 rounded-full object-cover"/></td>
                                 <td className="px-4 py-3">{teacherData.udise_code}</td>
                                 <td className="px-4 py-3">{teacherData.school_name}</td>
                                 <td className="px-4 py-3 font-medium">{teacherData.teacher_name}</td>
