@@ -26,10 +26,13 @@ const config = {
 
  production: {
   client: "pg",
- connection: {
- connectionString: process.env.DATABASE_URL,
- ssl: { rejectUnauthorized:false }
-}
+  connection: {
+   connectionString: process.env.DATABASE_URL,
+   ssl: {
+    require: true,
+    rejectUnauthorized: false
+   }
+  }
  }
 
 };
