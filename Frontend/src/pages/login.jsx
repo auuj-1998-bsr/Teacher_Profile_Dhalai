@@ -38,7 +38,6 @@ console.log("hello");
        if (err.response?.data?.message) {
     setError(err.response.data.message);
   } else {
-    setError("Server error");
       setError("Server error");
     }
   }

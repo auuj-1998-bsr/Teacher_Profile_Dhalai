@@ -9,15 +9,11 @@ const port = process.env.PORT || 3400;
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://teacher-profile-dhalai.onrender.com"
+    "https://teacher-profile-dhalai.vercel.app"
   ],
   credentials: true
 }));
-
 app.use(express.json());
-app.get("/", (req,res)=>{
-  res.send("Backend Running Successfully 🚀");
-});
 app.use("/uploads", express.static("uploads"));
 
 app.use("/", teacherRoutes);
