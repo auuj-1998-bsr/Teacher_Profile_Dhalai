@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRotateLeft, faFilePdf, faFileExcel,faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { TeacherView } from "../component/teacherView";
 
-
 function Dashboard() {
     const [page, setPage] = useState(1);
     const [ProfileData, setProfieData] = useState([]);
