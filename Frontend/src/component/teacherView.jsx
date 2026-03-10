@@ -38,7 +38,7 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
     useEffect(() => {
         if (isOpen && rowdata?.id) {
             setTeacherinfo(rowdata);
-            setPreview(`http://localhost:3400/uploads/${rowdata.image}`);
+            setPreview(`${import.meta.env.VITE_API_URL}/uploads/${rowdata.image}`);
         }
     }, [isOpen]);
 
