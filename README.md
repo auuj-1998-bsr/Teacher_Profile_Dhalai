@@ -130,6 +130,6 @@ Skills:
 * Node.js
 * PostgreSQL
 * REST APIs
-* AWS / Cloud Deployment
+* Versel / Render Deployment
 
 ---
