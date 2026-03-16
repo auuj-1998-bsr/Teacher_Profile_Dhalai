@@ -46,12 +46,11 @@ console.log("hello");
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-
+        <h3 className="text-2xl font-bold text-center mb-6"> Teacher Info</h3>
         <h2 className="text-2xl font-bold text-center mb-6">
           Login
         </h2>
-
-        {/* LOGIN TYPE */}
+ 
         <div className="flex justify-center gap-6 mb-5">
 
           <label>

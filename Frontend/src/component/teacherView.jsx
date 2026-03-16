@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import { ApiData } from "../services/api";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +7,7 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
     const [loading, setLoading] = useState();
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState();
+    const fileInputRef = useRef(null);
     const [teacherinfo, setTeacherinfo] = useState({
         academic_year: "",
         udise_code: "",
@@ -44,30 +45,25 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
 
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
+         fileInputRef.current.click();
         if (type === "file") {
             const file = files[0];
             if (!file) return;
-
             if (file.size > 2 * 1024 * 1024) {
                 alert("Image must be less than 2MB");
                 return;
             }
-
-
-
             setImage(file);
-
             const previewUrl = URL.createObjectURL(file);
             setPreview(previewUrl);
-
             return;
         }
-
         setTeacherinfo(prev => ({
             ...prev,
             [name]: value
         }));
     };
+
     const handlesubmit = (event) => {
         event.preventDefault();
         updateTeacherinfo();
@@ -106,9 +102,10 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
             Teacher Complete Details Form
         </h2>
         <div> {preview && (<img src={preview} alt="Preview" className="h-30 w-25 object-cover border mt-2 rounded" />)}
-            <input type="file" name="image" id="image" accept="image/*" onChange={handleChange} />
-            <input type="file" name="aadhar" id="aadhar" accept="image/pdf*" onChange={handleChange} />
+            <input type="file" name="image" id="image" ref={fileInputRef}    accept="image/*" style={{display:"none"}}/>
+            {/* <input type="file" name="aadhar" id="aadhar" accept="image/pdf*" onChange={handleChange} /> */}
         </div>
+        <button onClick={handleChange}>Upload Image</button>
 
         <Section title="School Details">
             <Input label="Academic Year" type="number" name="academic_year" value={teacherinfo.academic_year} onChange={handleChange} />
