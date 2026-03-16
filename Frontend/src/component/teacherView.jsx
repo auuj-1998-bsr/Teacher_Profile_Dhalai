@@ -43,9 +43,12 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
         }
     }, [isOpen]);
 
+    const openFileSelector = () => {
+  fileInputRef.current.click();
+};
+
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
-         fileInputRef.current.click();
         if (type === "file") {
             const file = files[0];
             if (!file) return;
@@ -102,10 +105,9 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
             Teacher Complete Details Form
         </h2>
         <div> {preview && (<img src={preview} alt="Preview" className="h-30 w-25 object-cover border mt-2 rounded" />)}
-            <input type="file" name="image" id="image" ref={fileInputRef}    accept="image/*" style={{display:"none"}}/>
-            {/* <input type="file" name="aadhar" id="aadhar" accept="image/pdf*" onChange={handleChange} /> */}
+            <input type="file" name="image" id="image" ref={fileInputRef}   onChange={handleChange}  accept="image/*" style={{display:"none"}}/>
         </div>
-        <button onClick={handleChange}>Upload Image</button>
+        <button onClick={openFileSelector}>Upload Image</button>
 
         <Section title="School Details">
             <Input label="Academic Year" type="number" name="academic_year" value={teacherinfo.academic_year} onChange={handleChange} />
