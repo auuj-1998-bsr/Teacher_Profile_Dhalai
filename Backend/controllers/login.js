@@ -26,11 +26,13 @@ export const loginTeacher = async (req, res) => {
   const ip=req.headers['x-forworded-for']?.split(',')[0]||req.socket.remotAddress;
   const browser=`${result.browser.name} ${result.browser.version}`;
   const device=`${result.os.name} ${result.os.version}`;
+  console.log(ip);
   await db("login_logs").insert({
+    teacher_code:teacher_code,
     ip_address:ip,
     browser:browser,
     device:device,
   }) 
-  
+
   res.json({ token, teacher: { name: teacher.teacher_name },message:"Login_Success" });
 };

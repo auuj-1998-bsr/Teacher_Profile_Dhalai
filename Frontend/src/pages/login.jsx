@@ -35,9 +35,11 @@ console.log("hello");
         window.location.href = "/";
       }
     } catch (err) {
+       console.log(err)
        if (err.response?.data?.message) {
     setError(err.response.data.message);
-  } else {
+  } else{
+   
       setError("Server error");
     }
   }
