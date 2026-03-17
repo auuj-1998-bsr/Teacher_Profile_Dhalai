@@ -5,7 +5,8 @@
 Teacher Profile Management System is a full-stack web application that allows administrators to manage teacher profiles efficiently.
 Users can create, edit, view, and manage teacher information with image upload and authentication features.
 
----
+---// Username:man1998
+      password:123456
 
 ##  Features
 
@@ -114,7 +115,11 @@ Backend API: https://teacher-profile-dhalai.onrender.com
 
 ## Screenshots
 
-(Add project screenshots here)
+<img width="1364" height="597" alt="Login Page" src="https://github.com/user-attachments/assets/61460fa0-7d13-429f-b30e-6eb84f1a147d" />
+
+<img width="1350" height="599" alt="Add New Teacher" src="https://github.com/user-attachments/assets/14372772-ee84-4383-b0f1-485952a41312" />
+<img width="1350" height="600" alt="Dashboard" src="https://github.com/user-attachments/assets/390bbc49-61ba-4fb3-9aad-d50f8e935d01" />
+
 
 ---
 
@@ -130,6 +135,6 @@ Skills:
 * Node.js
 * PostgreSQL
 * REST APIs
-* AWS / Cloud Deployment
+* Versel / Render Deployment
 
 ---
