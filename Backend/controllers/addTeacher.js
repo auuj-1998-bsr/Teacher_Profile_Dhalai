@@ -3,9 +3,8 @@ export default async function addTeacherData(req, res)  {
     
     try {
         const teacherinfo = req.body.teacherinfo;
-        await db("profile_master").insert({
-            ...teacherinfo,
-        });
+        const { id, ...data } = teacherinfo;
+        await db("profile_master").insert(data);
         res.status(201).json({
             message: "Data created successfully"
         });

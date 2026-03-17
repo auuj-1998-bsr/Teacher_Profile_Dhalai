@@ -39,7 +39,7 @@ export default function TeacherForm() {
             console.log("Error", err);
         }
     }
-
+console.log(teacherinfo);
     return (
         <div className="bg-white p-6 rounded-2xl shadow-lg space-y-8 max-w-6xl mx-auto">
             <h2 className="text-2xl font-semibold text-gray-800">

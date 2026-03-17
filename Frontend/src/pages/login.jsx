@@ -11,6 +11,7 @@ export default function LoginPage() {
 
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -19,17 +20,17 @@ export default function LoginPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
-
+setLoading(true);
     if (!form.loginType) {
       setError("Please select Admin or Teacher");
       return;
     }
-console.log("hello");
     try {
       const res = await ApiData.post("/login", form);
       const data = res.data;
       if (!res.data) {
         setError(data.message);
+        setLoading(false);
       } else {
         localStorage.setItem("token", data.token);
         window.location.href = "/";
@@ -48,7 +49,7 @@ console.log("hello");
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-        <h3 className="text-2xl font-bold text-center mb-6"> Teacher Info</h3>
+        <h3 className="text-2xl font-bold text-center"> Teacher Info</h3>
         <h2 className="text-2xl font-bold text-center mb-6">
           Login
         </h2>
@@ -115,7 +116,7 @@ console.log("hello");
           </div>
 
           <button className="w-full bg-indigo-600 text-white p-3 rounded-lg">
-            Login as {form.loginType}
+            {loading?"Login...":`Login as ${form.loginType}`}
           </button>
         </form>
       </div>

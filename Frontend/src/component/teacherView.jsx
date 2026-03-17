@@ -71,7 +71,6 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
         event.preventDefault();
         updateTeacherinfo();
         setLoading("loading");
-        console.log(teacherinfo);
     }
 
     const updateTeacherinfo = async () => {
@@ -104,10 +103,11 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
         <h2 className="text-2xl font-semibold text-gray-800">
             Teacher Complete Details Form
         </h2>
+        <span>{teacherinfo.id}</span>
         <div> {preview && (<img src={preview} alt="Preview" className="h-30 w-25 object-cover border mt-2 rounded" />)}
             <input type="file" name="image" id="image" ref={fileInputRef}   onChange={handleChange}  accept="image/*" style={{display:"none"}}/>
         </div>
-        <button onClick={openFileSelector}>Upload Image</button>
+        <button onClick={openFileSelector}>{preview==="https://teacher-profile-dhalai.onrender.com/uploads/null"?"Upload Image":"Change Image"}</button>
 
         <Section title="School Details">
             <Input label="Academic Year" type="number" name="academic_year" value={teacherinfo.academic_year} onChange={handleChange} />

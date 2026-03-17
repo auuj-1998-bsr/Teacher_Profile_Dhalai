@@ -23,7 +23,7 @@ export const loginTeacher = async (req, res) => {
   //login info 
   const parser=new UAParser (req.headers['user-agent']);
   const result=parser.getResult();
-  const ip=  req.headers['x-forwarded-for']?.split(',')[0] ||req.socket.remoteAddress;
+ const ip = req.headers["x-forwarded-for"]?.split(",")[0] ||req.connection?.remoteAddress ||req.socket?.remoteAddress || req.ip;
   const browser=`${result.browser.name} ${result.browser.version}`;
   const device=`${result.os.name} ${result.os.version}`;
   await db("login_logs").insert({

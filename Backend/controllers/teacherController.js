@@ -32,7 +32,7 @@ export async function getTeacherProfile(req, res) {
             return createPdf(filterrawdata, res);
         }
         const totalCount = (await rowData).length;
-        const teacherProfileData = await rowData.limit(limit).offset(offset).orderBy("id");
+        const teacherProfileData = await rowData.limit(limit).offset(offset).orderBy("id","asc");
         res.status(200).json({ teacherProfileData, totalCount });
     }
     catch (err) {
