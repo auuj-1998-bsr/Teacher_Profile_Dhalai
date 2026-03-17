@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
-app.set("trust proxy", true);
+app.set("trust proxy", true);  //----using ip addres 
 const port = process.env.PORT || 3400;
 app.use(cors({
   origin: [

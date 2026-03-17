@@ -33,5 +33,5 @@ export const loginTeacher = async (req, res) => {
     device: device,
   })
 
-  res.json({ token, teacher: { name: teacher.teacher_name, ip: ip, device: device }, message: "Login_Success" });
+  res.json({ token, teacher: { name: teacher.teacher_name }, message: "Login_Success" });
 };
