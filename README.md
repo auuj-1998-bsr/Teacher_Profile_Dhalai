@@ -108,7 +108,6 @@ npm run dev
 
 Frontend: https://teacher-profile-dhalai.vercel.app
 
-Backend API: https://teacher-profile-dhalai.onrender.com
 
 ---
 
