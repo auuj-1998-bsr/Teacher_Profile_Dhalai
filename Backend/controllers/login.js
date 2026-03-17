@@ -4,10 +4,10 @@ import db from "../database/db.js";
 import { UAParser } from "ua-parser-js";
 
 export const loginTeacher = async (req, res) => {
-  const {loginType,teacher_code, password } = req.body;
+  const { loginType, teacher_code, password } = req.body;
   const hash = await bcrypt.hash("123456", 10);
-  const teacher = await db("profile_master").where("teacher_code", teacher_code) .first();
- 
+  const teacher = await db("profile_master").where("teacher_code", teacher_code).first();
+
   if (!teacher)
     return res.status(401).json({ message: "Teacher_Code not found" });
 
@@ -21,17 +21,17 @@ export const loginTeacher = async (req, res) => {
   );
 
   //login info 
-  const parser=new UAParser (req.headers['user-agent']);
-  const result=parser.getResult();
- const ip = req.headers["x-forwarded-for"]?.split(",")[0] ||req.connection?.remoteAddress ||req.socket?.remoteAddress || req.ip;
-  const browser=`${result.browser.name} ${result.browser.version}`;
-  const device=`${result.os.name} ${result.os.version}`;
+  const parser = new UAParser(req.headers['user-agent']);
+  const result = parser.getResult();
+  const ip = req.headers["x-forwarded-for"]?.split(",")[0] || req.socket?.remoteAddress;
+  const browser = `${result.browser.name} ${result.browser.version}`;
+  const device = `${result.os.name} ${result.os.version}`;
   await db("login_logs").insert({
-    teacher_code:teacher_code,
-    ip_address:ip,
-    browser:browser,
-    device:device,
-  }) 
+    teacher_code: teacher_code,
+    ip_address: ip,
+    browser: browser,
+    device: device,
+  })
 
-  res.json({ token, teacher: { name: teacher.teacher_name,ip:ip,device:device },message:"Login_Success" });
+  res.json({ token, teacher: { name: teacher.teacher_name, ip: ip, device: device }, message: "Login_Success" });
 };
