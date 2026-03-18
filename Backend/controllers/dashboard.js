@@ -10,7 +10,7 @@ export async function getdashboard(req, res) {
                 db.raw(`COUNT(CASE WHEN school_category_code = '2 - Upper primary School' THEN 1 END) as upper_primary`),
                 db.raw(`COUNT(CASE WHEN school_category_code = '6 - Secondary School' THEN 1 END) as secondary`),
                 db.raw(`COUNT(CASE WHEN school_category_code = '3 - Higher Secondary School' THEN 1 END) as higher_secondary`)
-            );
+            ).first();
         console.log("Dashboard route hit");
         res.status(200).json({ data });
     }
