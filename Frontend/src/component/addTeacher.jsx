@@ -70,7 +70,7 @@ export default function TeacherForm() {
 
             <Section title="Subjects Studied">
                 <Input label="Maths Studied Upto" type="number" min={1} max={2} name="maths_studied_upto" value={teacherinfo.maths_studied_upto} onChange={handleChange} />
-                min                <Input label="English Studied Upto" type="number" min={1} max={2} name="english_studied_upto" value={teacherinfo.english_studied_upto} onChange={handleChange} />
+                <Input label="English Studied Upto" type="number" min={1} max={2} name="english_studied_upto" value={teacherinfo.english_studied_upto} onChange={handleChange} />
                 <Input label="Social Study Upto" type="number" min={1} max={2} name="soc_study_upto" value={teacherinfo.soc_study_upto} onChange={handleChange} />
             </Section>
 

@@ -1,29 +1,33 @@
 import { PieChart, Pie, Cell, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 import { ApiData } from "../services/api";
 import { useEffect, useState } from "react";
+import { CpuIcon } from "lucide-react";
 
 export default function Dashboard() {
-const[count,setCount]=useState(0);
-const [maleCount,setMaleCount]=useState();
-const [femaleCount,setFemaleCount]=useState();
-const [primaryCount,setPrimaryCount]=useState();
-const [upperPrimary,setUpperPrimary]=useState();
-const [secondary,setSecondary]=useState();
-const [higherSecondary,HigherSecondary]=useState();
+  const [count, setCount] = useState(0);
+  const [maleCount, setMaleCount] = useState(0);
+  const [femaleCount, setFemaleCount] = useState(0);
+  const [primaryCount, setPrimaryCount] = useState(0);
+  const [upperPrimary, setUpperPrimary] = useState(0);
+  const [secondary, setSecondary] = useState(0);
+  const [higherSecondary, HigherSecondary] = useState(0);
 
   useEffect(() => {
     getData()
   }, []);
   const getData = async () => {
     try {
-      const responce = await ApiData.post("/dashboard");
-      setCount(responce.data.countData.total_records);
-      setMaleCount(responce.data.countData.male_Count);
-      setFemaleCount(responce.data.countData.female_Count);
-      setPrimaryCount(responce.data.countData.primary);
-      setUpperPrimary(responce.data.countData.upper_primary);
-      setSecondary(responce.data.secondary);
-      HigherSecondary(responce.data.countData.higher_secondary);
+      const response = await ApiData.post("/dashboard");
+      console.log(response.data.countData);
+      console.log("dadada");
+      console.log(response.data);
+      setCount(Number(response.data.countData.total_records));
+      setMaleCount(Number(response.data.countData.male_Count));
+      setFemaleCount(Number(response.data.countData.female_Count));
+      setPrimaryCount(Number(response.data.countData.primary));
+      setUpperPrimary(Number(response.data.countData.upper_primary));
+      setSecondary(Number(response.data.secondary));
+      HigherSecondary(Number(response.data.countData.higher_secondary));
 
     }
     catch (err) {
@@ -31,15 +35,15 @@ const [higherSecondary,HigherSecondary]=useState();
     }
   }
   const genderData = [
-    { name: "Male", value: Number(maleCount) },
-    { name: "Female", value: Number(femaleCount) }
+    { name: "Male", value: maleCount },
+    { name: "Female", value: femaleCount }
   ];
 
   const schoolData = [
-    { name: "Primary", count: Number(primaryCount) },
-    { name: "Upper Primary", count: Number(upperPrimary) },
-    { name: "Secondary", count: Number(secondary) },
-    { name: "Higher Secondary", count: Number(higherSecondary) }
+    { name: "Primary", count: primaryCount },
+    { name: "Upper Primary", count: upperPrimary },
+    { name: "Secondary", count: secondary },
+    { name: "Higher Secondary", count: higherSecondary }
   ];
 
   const COLORS = ["#0088FE", "#FF69B4"];

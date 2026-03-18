@@ -17,7 +17,7 @@ function Sidebar() {
         <ul className="space-y-2">
 
           <li>
-            <NavLink to="/dashboard" className={menuClass}>
+            <NavLink to="/" className={menuClass}>
           <FontAwesomeIcon icon={faChartLine} />
               Dashboard
             </NavLink>
