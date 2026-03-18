@@ -18,7 +18,7 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<Dashboard/>}/>
+          <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/profile" element={<TeacherProfile />} />
           <Route path="/teachers" element={<TeacherForm />} />
           
