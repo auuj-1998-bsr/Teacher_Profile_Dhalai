@@ -5,6 +5,7 @@ import { CpuIcon } from "lucide-react";
 
 export default function Dashboard() {
   const [count, setCount] = useState(0);
+  const [countSchool,setCountSchool]=useState(0);
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
   const [primaryCount, setPrimaryCount] = useState(0);
@@ -22,6 +23,7 @@ export default function Dashboard() {
       console.log("dadada");
       console.log(response.data);
       setCount(Number(response.data.countData.total_records));
+      setCountSchool(Number(response.data.countData.total_school));
       setMaleCount(Number(response.data.countData.male_count));
       setFemaleCount(Number(response.data.countData.female_count));
       setPrimaryCount(Number(response.data.countData.primary));
@@ -66,7 +68,7 @@ export default function Dashboard() {
         </div>
         <div className="bg-purple-400 text-white p-4 rounded-xl shadow">
           <h2>Schools</h2>
-          <p className="text-2xl font-bold">{count}</p>
+          <p className="text-2xl font-bold">{countSchool}</p>
         </div>
       </div>
 

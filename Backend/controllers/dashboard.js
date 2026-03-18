@@ -4,6 +4,7 @@ export async function getdashboard(req, res) {
         const countData = await db("profile_master")
             .select(
                 db.raw(`COUNT(*)as total_records`),
+                db.raw(`COUNT(DISTINCT udise_code) as total_school`),
                 db.raw(`COUNT(CASE WHEN gender = '1' THEN 1 END) as male_count`),
                 db.raw(`COUNT(CASE WHEN gender = '2' THEN 1 END) as female_count`),
                 db.raw(`COUNT(CASE WHEN school_category_code = '1 - Primary School' THEN 1 END) as primary`),
