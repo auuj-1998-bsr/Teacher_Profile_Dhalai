@@ -22,8 +22,8 @@ export default function Dashboard() {
       console.log("dadada");
       console.log(response.data);
       setCount(Number(response.data.countData.total_records));
-      setMaleCount(Number(response.data.countData.male_Count));
-      setFemaleCount(Number(response.data.countData.female_Count));
+      setMaleCount(Number(response.data.countData.male_count));
+      setFemaleCount(Number(response.data.countData.female_count));
       setPrimaryCount(Number(response.data.countData.primary));
       setUpperPrimary(Number(response.data.countData.upper_primary));
       setSecondary(Number(response.data.secondary));
