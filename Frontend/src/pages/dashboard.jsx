@@ -17,15 +17,13 @@ const [higherSecondary,HigherSecondary]=useState();
   const getData = async () => {
     try {
       const responce = await ApiData.post("/dashboard");
-      console.log(responce);
-      console.log("hello");
-      setCount(responce.data.total_records);
-      setMaleCount(responce.data.male_Count);
-      setFemaleCount(responce.data.female_Count);
-      setPrimaryCount(responce.data.primary);
-      setUpperPrimary(responce.data.upper_primary);
+      setCount(responce.data.countData.total_records);
+      setMaleCount(responce.data.countData.male_Count);
+      setFemaleCount(responce.data.countData.female_Count);
+      setPrimaryCount(responce.data.countData.primary);
+      setUpperPrimary(responce.data.countData.upper_primary);
       setSecondary(responce.data.secondary);
-      HigherSecondary(responce.data.higher_secondary);
+      HigherSecondary(responce.data.countData.higher_secondary);
 
     }
     catch (err) {
