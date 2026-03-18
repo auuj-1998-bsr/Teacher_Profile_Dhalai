@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChartLine,
   faUsers,
-  faFilePdf
+  faUserPlus
 } from "@fortawesome/free-solid-svg-icons";
 
 function Sidebar() {
@@ -18,28 +18,29 @@ function Sidebar() {
 
           <li>
             <NavLink to="/" className={menuClass}>
-              <FontAwesomeIcon icon={faChartLine} />
+          <FontAwesomeIcon icon={faChartLine} />
               Dashboard
             </NavLink>
           </li>
 
           <li>
-            <NavLink to="/teachers" className={menuClass}>
+            <NavLink to="/profile" className={menuClass}>
               <FontAwesomeIcon icon={faUsers} />
-              Add Teachers
+              Teacher Profile
             </NavLink>
           </li>
+          <NavLink to="/teachers" className={menuClass}>
+            <FontAwesomeIcon icon={faUserPlus} />
+            Add Teachers
+          </NavLink>
 
           <li>
-            <NavLink to="/reports" className={menuClass}>
-              <FontAwesomeIcon icon={faFilePdf} />
-              Reports
-            </NavLink>
+
           </li>
         </ul>
       </nav>
     </aside>
-  
+
   );
 }
 

@@ -20,4 +20,4 @@ const uploadsize = multer({
 
 export const upload = multer({uploadsize, storage });
 
-///multer is a node-js middleware for handling multipart/form-data, uploading(file,image pdf)....  
+///multer is a node-js middleware for handling multipart/form-data, uploading(file,image pdf)....///////  

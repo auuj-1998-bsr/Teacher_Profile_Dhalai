@@ -2,7 +2,6 @@ import { useState } from "react";
 import { ApiData } from "../services/api";
 export default function TeacherForm() {
     const [loading, setLoading] = useState();
-    const [fieldhover, setFieldhover] = useState(false);
     const initialState = {
         academic_year: "", udise_code: "", school_name: "", district_name_code: "", block_name_code: "", school_category_code: "",
         school_type: "", teacher_name: "", gender: "", dob: "", teacher_code: "", social_category: "", hig_qual_acad: "", trade: "",
@@ -32,14 +31,12 @@ export default function TeacherForm() {
             console.log(message);
             alert(message);
             setLoading();
-
         }
-
         catch (err) {
             console.log("Error", err);
         }
     }
-console.log(teacherinfo);
+    console.log(teacherinfo);
     return (
         <div className="bg-white p-6 rounded-2xl shadow-lg space-y-8 max-w-6xl mx-auto">
             <h2 className="text-2xl font-semibold text-gray-800">
@@ -67,28 +64,27 @@ console.log(teacherinfo);
             </Section>
 
             <Section title="Qualification Details">
-                <Input label="Highest Academic Qualification" type="number" minLength={10} maxLength={10} name="hig_qual_acad" value={teacherinfo.hig_qual_acad} onChange={handleChange} />
-                <Input label="Trade" name="trade" type="number" max={2} value={teacherinfo.trade} onChange={handleChange} />
+                <Input label="Highest Academic Qualification" type="number" min={10} maxLength={10} name="hig_qual_acad" value={teacherinfo.hig_qual_acad} onChange={handleChange} />
+                <Input label="Trade" name="trade" type="number" min={1} max={2} value={teacherinfo.trade} onChange={handleChange} />
             </Section>
 
             <Section title="Subjects Studied">
-                <Input label="Maths Studied Upto" type="number" max={2} name="maths_studied_upto" value={teacherinfo.maths_studied_upto} onChange={handleChange} />
-                <Input label="Science Studied Upto" type="number" max={2} name="science_studied_upto" value={teacherinfo.science_studied_upto} onChange={handleChange} />
-                <Input label="English Studied Upto" type="number" max={2} name="english_studied_upto" value={teacherinfo.english_studied_upto} onChange={handleChange} />
-                <Input label="Social Study Upto" type="number" max={2} name="soc_study_upto" value={teacherinfo.soc_study_upto} onChange={handleChange} />
+                <Input label="Maths Studied Upto" type="number" min={1} max={2} name="maths_studied_upto" value={teacherinfo.maths_studied_upto} onChange={handleChange} />
+                min                <Input label="English Studied Upto" type="number" min={1} max={2} name="english_studied_upto" value={teacherinfo.english_studied_upto} onChange={handleChange} />
+                <Input label="Social Study Upto" type="number" min={1} max={2} name="soc_study_upto" value={teacherinfo.soc_study_upto} onChange={handleChange} />
             </Section>
 
             <Section title="Languages Known">
-                <Input label="Language 1" type="number" max={2} name="language_1" value={teacherinfo.language_1} onChange={handleChange} />
-                <Input label="Language 2" type="number" max={2} name="language_2" value={teacherinfo.language_2} onChange={handleChange} />
-                <Input label="Language 3" type="number" max={2} name="language_3" value={teacherinfo.language_3} onChange={handleChange} />
+                <Input label="Language 1" type="number" min={1} max={2} name="language_1" value={teacherinfo.language_1} onChange={handleChange} />
+                <Input label="Language 2" type="number" min={1} max={2} name="language_2" value={teacherinfo.language_2} onChange={handleChange} />
+                <Input label="Language 3" type="number" min={1} max={2} name="language_3" value={teacherinfo.language_3} onChange={handleChange} />
             </Section>
 
             <Section title="Service_Details">
                 <Input label="DOJ Service" type="date" name="doj_service" min="1980-01-01" max="2024-12-31" value={teacherinfo.doj_service} onChange={handleChange} />
-                <Input label="Appointed For Level" type="number" max={2} name="appointed_for_level" value={teacherinfo.appointed_for_level} onChange={handleChange} />
-                <Input label="Subject Taught 1" type="number" max={2} name="sub_taught_1" value={teacherinfo.sub_taught_1} onChange={handleChange} />
-                <Input label="Subject Taught 2" type="number" max={2} name="sub_taught_2" value={teacherinfo.sub_taught_2} onChange={handleChange} />
+                <Input label="Appointed For Level" type="number" min={1} max={2} name="appointed_for_level" value={teacherinfo.appointed_for_level} onChange={handleChange} />
+                <Input label="Subject Taught 1" type="number" min={1} max={2} name="sub_taught_1" value={teacherinfo.sub_taught_1} onChange={handleChange} />
+                <Input label="Subject Taught 2" type="number" min={1} max={2} name="sub_taught_2" value={teacherinfo.sub_taught_2} onChange={handleChange} />
             </Section>
             <div className="text-center pt-4">
                 <button className="bg-blue-600 text-white px-10 py-3 rounded-xl hover:bg-blue-700 transition" onClick={handlesubmit}>

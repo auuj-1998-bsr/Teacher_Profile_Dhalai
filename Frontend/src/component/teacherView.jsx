@@ -99,16 +99,14 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
     }
     if (!isOpen) return null;
     return (isOpen && (<div className="bg-white p-6 rounded-xl shadow-lg max-w-6xl w-full h-full">
-        <span className="flex justify-end cursor-pointer" title="Close" onClick={onClose}><FontAwesomeIcon icon={faCircleXmark} /></span>
+        <span className="flex justify-end cursor-pointer hover:caret-red-700" title="Close" onClick={onClose}><FontAwesomeIcon icon={faCircleXmark} /></span>
         <h2 className="text-2xl font-semibold text-gray-800">
             Teacher Complete Details Form
         </h2>
-        <span>{teacherinfo.id}</span>
         <div> {preview && (<img src={preview} alt="Preview" className="h-30 w-25 object-cover border mt-2 rounded" />)}
             <input type="file" name="image" id="image" ref={fileInputRef}   onChange={handleChange}  accept="image/*" style={{display:"none"}}/>
         </div>
-        <button onClick={openFileSelector}>{preview==="https://teacher-profile-dhalai.onrender.com/uploads/null"?"Upload Image":"Change Image"}</button>
-
+        <button onClick={openFileSelector}>{preview===`${import.meta.env.VITE_API_URL}/uploads/null`?"Upload Image":"Change Image"}</button>
         <Section title="School Details">
             <Input label="Academic Year" type="number" name="academic_year" value={teacherinfo.academic_year} onChange={handleChange} />
             <Input label="UDISE Code" type="text" minLength={11} maxLength={11} name="udise_code" value={teacherinfo.udise_code} onChange={handleChange} />
@@ -118,7 +116,6 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
             <Input label="School Category Code" type="text" minLength={4} maxLength={50} name="school_category_code" value={teacherinfo.school_category_code} onChange={handleChange} />
             <Input label="School Type" type="text" minLength={4} maxLength={50} name="school_type" value={teacherinfo.school_type} onChange={handleChange} />
         </Section>
-
         <Section title="Teacher Personal Details">
             <Input label="Teacher Name" type="text" minLength={4} maxLength={50} name="teacher_name" value={teacherinfo.teacher_name} onChange={handleChange} />
             <Input label="Gender" type="text" minLength={4} maxLength={50} name="gender" value={teacherinfo.gender} onChange={handleChange} />
@@ -127,7 +124,6 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
             <Input label="Social Category" type="text" name="social_category" value={teacherinfo.social_category} onChange={handleChange} />
 
         </Section>
-
         <Section title="Qualification Details">
             <Input label="Highest Academic Qualification" type="text" minLength={10} maxLength={10} name="hig_qual_acad" value={teacherinfo.hig_qual_acad} onChange={handleChange} />
             <Input label="Trade" name="trade" type="text" maxLength={2} value={teacherinfo.trade} onChange={handleChange} />

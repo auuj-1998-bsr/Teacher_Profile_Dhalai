@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/dashboard";
 import TeacherForm from "./component/addTeacher";
 import MainLayout from "./pages/layout";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import LoginPage from "./pages/login";
+import TeacherProfile from "./pages/teacherProfile";
+import Dashboard from "./pages/dashboard";
 
 function App() {
   return (
@@ -17,8 +18,10 @@ function App() {
             </ProtectedRoute>
           }
         >
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/" element={<Dashboard/>}/>
+          <Route path="/profile" element={<TeacherProfile />} />
           <Route path="/teachers" element={<TeacherForm />} />
+          
         </Route>
 
       </Routes>
