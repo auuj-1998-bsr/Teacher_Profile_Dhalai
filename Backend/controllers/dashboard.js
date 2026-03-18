@@ -1,4 +1,4 @@
-import db from "../database/db";
+import db from "../database/db.js";
 export async function getdashboard(req,res){
 try{
 const data = await db("profile_master")
@@ -12,6 +12,7 @@ const data = await db("profile_master")
     db.raw(`COUNT(CASE WHEN school_category_code = '6' THEN 1 END) as secondary`),
     db.raw(`COUNT(CASE WHEN school_category_code = '3' THEN 1 END) as higher_secondary`)
   );
+  console.log("Dashboard route hit");
   res.status(200).json({data});
 }
 catch(err){
