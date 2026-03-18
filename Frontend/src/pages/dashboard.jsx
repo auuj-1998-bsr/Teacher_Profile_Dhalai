@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard() {
 const[count,setCount]=useState(0);
-const [maleCount,setMaleCount]=useState(700);
-const [femaleCount,setFemaleCount]=useState(453);
-const [primaryCount,setPrimaryCount]=useState(233);
-const [upperPrimary,setUpperPrimary]=useState(345);
-const [secondary,setSecondary]=useState(345);
-const [higherSecondary,HigherSecondary]=useState(24);
+const [maleCount,setMaleCount]=useState();
+const [femaleCount,setFemaleCount]=useState();
+const [primaryCount,setPrimaryCount]=useState();
+const [upperPrimary,setUpperPrimary]=useState();
+const [secondary,setSecondary]=useState();
+const [higherSecondary,HigherSecondary]=useState();
 
   useEffect(() => {
     getData()
