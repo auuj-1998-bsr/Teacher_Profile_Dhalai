@@ -33,15 +33,15 @@ const [higherSecondary,HigherSecondary]=useState(24);
     }
   }
   const genderData = [
-    { name: "Male", value: maleCount },
-    { name: "Female", value: femaleCount }
+    { name: "Male", value: Number(maleCount) },
+    { name: "Female", value: Number(femaleCount) }
   ];
 
   const schoolData = [
-    { name: "Primary", count: primaryCount },
-    { name: "Upper Primary", count: upperPrimary },
-    { name: "Secondary", count: secondary },
-    { name: "Higher Secondary", count: higherSecondary }
+    { name: "Primary", count: Number(primaryCount) },
+    { name: "Upper Primary", count: Number(upperPrimary) },
+    { name: "Secondary", count: Number(secondary) },
+    { name: "Higher Secondary", count: Number(higherSecondary) }
   ];
 
   const COLORS = ["#0088FE", "#FF69B4"];
@@ -64,7 +64,7 @@ const [higherSecondary,HigherSecondary]=useState(24);
         </div>
         <div className="bg-purple-400 text-white p-4 rounded-xl shadow">
           <h2>Schools</h2>
-          <p className="text-2xl font-bold">145</p>
+          <p className="text-2xl font-bold">{count}</p>
         </div>
       </div>
 
