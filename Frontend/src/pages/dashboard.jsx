@@ -1,7 +1,7 @@
 import { PieChart, Pie, Cell, Tooltip, BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend } from "recharts";
 import { ApiData } from "../services/api";
 import { useEffect, useState } from "react";
-import { CpuIcon } from "lucide-react";
+
 
 export default function Dashboard() {
   const [count, setCount] = useState(0);
@@ -67,13 +67,11 @@ export default function Dashboard() {
           <p className="text-2xl font-bold">{count}</p>
         </div>
         <div className="bg-purple-400 text-white p-4 rounded-xl shadow">
-          <h2>Schools</h2>
+          <h2>Total Schools</h2>
           <p className="text-2xl font-bold">{countSchool}</p>
         </div>
       </div>
-
       <div className="grid grid-cols-2 gap-6">
-
         <div className="bg-white p-4 rounded-xl shadow">
           <h2 className="mb-4 font-semibold">Gender Distribution</h2>
           <PieChart width={300} height={300}>
@@ -90,8 +88,7 @@ export default function Dashboard() {
             <Tooltip />
           </PieChart>
         </div>
-
-        <div className="bg-white p-4 rounded-xl shadow">
+        <div className="bg-white p-3 rounded-xl shadow">
           <h2 className="mb-4 font-semibold">School Type</h2>
           <BarChart width={400} height={300} data={schoolData}>
             <CartesianGrid strokeDasharray="3 3" />
@@ -99,10 +96,9 @@ export default function Dashboard() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="count" />
+            <Bar dataKey="count" fill="#EB401C" />
           </BarChart>
         </div>
-
       </div>
     </div>
   );
