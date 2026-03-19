@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard() {
   const [count, setCount] = useState(0);
-  const [countSchool,setCountSchool]=useState(0);
+  const [countSchool, setCountSchool] = useState(0);
   const [maleCount, setMaleCount] = useState(0);
   const [femaleCount, setFemaleCount] = useState(0);
   const [primaryCount, setPrimaryCount] = useState(0);
@@ -28,7 +28,7 @@ export default function Dashboard() {
       setFemaleCount(Number(response.data.countData.female_count));
       setPrimaryCount(Number(response.data.countData.primary));
       setUpperPrimary(Number(response.data.countData.upper_primary));
-      setSecondary(Number(response.data.secondary));
+      setSecondary(Number(response.data.countData.secondary));
       HigherSecondary(Number(response.data.countData.higher_secondary));
 
     }
@@ -96,7 +96,7 @@ export default function Dashboard() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="count" fill="#EB401C" />
+            <Bar dataKey="count" fill="#E84F35" />
           </BarChart>
         </div>
       </div>
