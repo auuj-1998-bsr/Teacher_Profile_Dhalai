@@ -106,7 +106,7 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
         <div> {preview && (<img src={preview} alt="Preview" className="h-30 w-25 object-cover border mt-2 rounded" />)}
             <input type="file" name="image" id="image" ref={fileInputRef}   onChange={handleChange}  accept="image/*" style={{display:"none"}}/>
         </div>
-        <button onClick={openFileSelector}>{preview===`${import.meta.env.VITE_API_URL}/uploads/null`?"Upload Image":"Change Image"}</button>
+        <button onClick={openFileSelector} className="cursor-pointer">{preview===`${import.meta.env.VITE_API_URL}/uploads/null`?"Upload Image":"Change Image"}</button>
         <Section title="School Details">
             <Input label="Academic Year" type="number" name="academic_year" value={teacherinfo.academic_year} onChange={handleChange} />
             <Input label="UDISE Code" type="text" minLength={11} maxLength={11} name="udise_code" value={teacherinfo.udise_code} onChange={handleChange} />
