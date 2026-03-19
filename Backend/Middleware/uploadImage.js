@@ -1,23 +1,28 @@
 import multer from "multer";
+import path from "path";
+
+const uploadDir = path.join(process.cwd(), "uploads");
 
 const storage = multer.diskStorage({
-    destination: "uploads/",
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + "_" + file.originalname);
-    },
-});
-
-const uploadsize = multer({
-  storage,
-  limits: { fileSize: 2 * 1024 * 1024 }, 
-  fileFilter: (req, file, cb) => {
-    if (!file.mimetype.startsWith("image/")) {
-      return cb(new Error("Only image files are allowed!"));
-    }
-    cb(null, true);
+  destination: (req, file, cb) => {
+    cb(null, uploadDir); 
+  },
+  filename: (req, file, cb) => {
+    const cleanName = file.originalname.replace(/\s+/g, "_");
+    cb(null, Date.now() + "_" + cleanName);
   },
 });
 
-export const uploads = uploadsize;
+const uploads = multer({
+  storage,
+  limits: { fileSize: 2 * 1024 * 1024 },
+});
 
-///multer is a node-js middleware for handling multipart/form-data, uploading(file,image pdf)....  
+export { uploads };
+
+// ///multer is a node-js middleware for handling multipart/form-data, uploading(file,image pdf)....  
+
+
+
+
+
