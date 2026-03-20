@@ -6,14 +6,15 @@ export default function TeachersQuiz() {
     const [quix, setQuiz] = useState();
 
     useEffect(() => {
-        getQuizQuections();
+        getQuizQuestions();
     }, []);
 
-    const getQuizQuections = async () => {
+    const getQuizQuestions = async () => {
         try{
         const response = await ApiData.post("/teachersQuiz");
-        console.log(response.data.allQuection);
-        setQuiz(response.data.allQuection);
+        console.log("hello quiz");
+        console.log(response.data.allQuestion);
+        setQuiz(response.data.allQuestion);
         }
         catch(err){
            console.error(err.message);
@@ -21,6 +22,7 @@ export default function TeachersQuiz() {
     }
     return (
         <>
+        <h1>helo</h1>
         </>
     )
 };

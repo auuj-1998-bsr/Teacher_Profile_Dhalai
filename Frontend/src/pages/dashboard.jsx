@@ -19,9 +19,6 @@ export default function Dashboard() {
   const getData = async () => {
     try {
       const response = await ApiData.post("/dashboard");
-      console.log(response.data.countData);
-      console.log("dadada");
-      console.log(response.data);
       setCount(Number(response.data.countData.total_records));
       setCountSchool(Number(response.data.countData.total_school));
       setMaleCount(Number(response.data.countData.male_count));
