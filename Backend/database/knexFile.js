@@ -1,17 +1,3 @@
-// export default {
-//   development: {
-//     client: "pg",
-//     connection: {
-//       host: "localhost",
-//       user: "postgres",
-//       password: "postgres",
-//       database: "postgres",
-//       port: 5432
-//     }
-//   }
-// };
-
-
 const config = {
 
  development: {
@@ -20,7 +6,8 @@ const config = {
    host: "127.0.0.1",
    user: "postgres",
    password: "postgres",
-   database: "postgres"
+   database: "postgres",
+    port: 5432
   }
  },
 
@@ -36,5 +23,4 @@ const config = {
  }
 
 };
-
 export default config;

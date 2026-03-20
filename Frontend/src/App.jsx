@@ -5,6 +5,7 @@ import ProtectedRoute from "./pages/ProtectedRoute";
 import LoginPage from "./pages/login";
 import TeacherProfile from "./pages/teacherProfile";
 import Dashboard from "./pages/dashboard";
+import TeachersQuiz from "./pages/teachersQuiz";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/" element={<Dashboard/>}/>
           <Route path="/profile" element={<TeacherProfile />} />
           <Route path="/teachers" element={<TeacherForm />} />
-          
+          <Route path="/teachersQuiz" element={<TeachersQuiz/>}/>
         </Route>
 
       </Routes>

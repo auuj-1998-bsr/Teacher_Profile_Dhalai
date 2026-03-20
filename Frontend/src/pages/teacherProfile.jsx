@@ -91,7 +91,6 @@ function TeacherProfile() {
         setUdiseCode("0");
         console.log("reset");
     }
-
     const handleView = (data) => {
         setRowdata(data);
         setIsModalOpen(prev => !prev);
@@ -133,7 +132,7 @@ function TeacherProfile() {
                     <option value="DUMBURNAGAR">DUMBURNAGAR</option>
                     <option value="SHILLONG">SHILLONG</option>
                 </select>
-                <select className="border rounded px-3 py-2 text-sm" value="0" onChange={(e) => setGender(e.target.value)}>
+                <select className="border rounded px-3 py-2 text-sm" value={gender} onChange={(e) => setGender(e.target.value)}>
                     <option value="0">Gender</option>
                     <option value="1">Male</option>
                     <option value="2">Female</option>

@@ -58,7 +58,7 @@ export default function TeacherForm() {
                 <Input label="Teacher Name" type="text" minLength={4} maxLength={50} name="teacher_name" value={teacherinfo.teacher_name} onChange={handleChange} />
                 <Input label="Gender" type="number" min={4} max={50} name="gender" value={teacherinfo.gender} onChange={handleChange} />
                 <Input label="Date of Birth" type="date" min="1970-01-01" name="dob" max="2003-12-01" value={teacherinfo.dob} onChange={handleChange} />
-                <Input label="Teacher Code" type="text" name="teacher_code" value={teacherinfo.teacher_code} onChange={handleChange} />
+                <Input label="Teacher Code" type="text" name="teacher_code" min={4} max={10} value={teacherinfo.teacher_code} onChange={handleChange} />
                 <Input label="Social Category" type="number" name="social_category" value={teacherinfo.social_category} onChange={handleChange} />
 
             </Section>
