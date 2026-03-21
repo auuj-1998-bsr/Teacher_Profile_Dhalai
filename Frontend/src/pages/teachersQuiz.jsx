@@ -3,7 +3,7 @@ import { ApiData } from "../services/api"
 import { useEffect } from "react";
 
 export default function TeachersQuiz() {
-    const [quix, setQuiz] = useState();
+    const [quiz, setQuiz] = useState();
 
     useEffect(() => {
         getQuizQuestions();
@@ -22,7 +22,13 @@ export default function TeachersQuiz() {
     }
     return (
         <>
-        <h1>helo</h1>
+        <h1>hwlll</h1>
+        {/* <h1>Quiz Questions</h1>
+        {quiz.map((q)=>{
+            <div key={q.id}>
+                <p>{q.Questions}</p>
+            </div>
+        })} */}
         </>
     )
 };

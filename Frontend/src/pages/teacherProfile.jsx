@@ -150,10 +150,10 @@ function TeacherProfile() {
                     <FontAwesomeIcon icon={faArrowRotateLeft} /></button>
                 <h1 title="Download_Pdf" onClick={!pdfloading ? () => handleTeacherReports("pdf") && setSpin("pdf") : null}
                     className="pl-2 pr-0 px-3 py-2 cursor-pointer transition">
-                    <FontAwesomeIcon icon={spin === "pdf" ? faSpinner : faFilePdf} /></h1>
+                    <FontAwesomeIcon icon={faFilePdf} /></h1>
                 <h1 title="Download_csv" onClick={!pdfloading ? () => handleTeacherReports("excel") && setSpin("excel") : null}
                     className="pl-2 pr-0 px-3 py-2 cursor-pointer transition" >
-                    <FontAwesomeIcon icon={spin === "excel" ? faSpinner : faFileExcel} /></h1>
+                    <FontAwesomeIcon icon={faFileExcel} /></h1>
             </div>
             <TeacherView
                 rowdata={rowdata}
