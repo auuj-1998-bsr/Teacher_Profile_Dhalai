@@ -47,7 +47,7 @@ export default function TeachersQuiz() {
         }
     };
     return (
-        <div className="min-h-screen bg-gray-100 p-6">
+        <div className=" felx justify-center bg-gray-100 p-6 w-full h-full">
   <h1 className="text-2xl font-bold text-center mb-6">
     Quiz Questions
   </h1>
@@ -64,7 +64,7 @@ export default function TeachersQuiz() {
           {q.options.map((opt, i) => (
             <label
               key={i}
-              className="flex items-center gap-2 p-2 border rounded-lg cursor-pointer hover:bg-gray-50"
+              className="flex items-left gap-2 p-2 border rounded-lg cursor-pointer hover:bg-gray-50"
             >
               <input
                 type="radio"
