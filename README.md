@@ -131,7 +131,7 @@ BCA Graduate | Full Stack Developer
 Skills:
 
 * React.js
-* Node.js
+* Node.js (Express.js)
 * PostgreSQL
 * REST APIs
 * Versel / Render Deployment
