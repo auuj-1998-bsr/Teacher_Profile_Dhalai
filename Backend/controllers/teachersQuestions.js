@@ -7,7 +7,8 @@ export async function teacherQuestions(req, res) {
                 "q.id as question_id",
                 "q.question",
                 "o.id",
-                "o.option_text"
+                "o.option_text",
+                 "o.is_correct"
             );
         res.status(200).json({ allData });
     } catch (err) {

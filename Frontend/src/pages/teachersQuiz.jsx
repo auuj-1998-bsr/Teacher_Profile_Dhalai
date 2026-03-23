@@ -1,84 +1,133 @@
-import { useState } from "react";
-import { ApiData } from "../services/api"
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import { ApiData } from "../services/api";
 
 export default function TeachersQuiz() {
-    const [quiz, setQuiz] = useState([]);
+  const [quiz, setQuiz] = useState([]);
+  const [answers, setAnswers] = useState({});
+  const [score, setScore] = useState(null);
 
-    useEffect(() => {
-        getQuizQuestions();
-    }, []);
+  useEffect(() => {
+    getQuizQuestions();
+  }, []);
 
-    const getQuizQuestions = async () => {
-        try {
-            const response = await ApiData.post("/teachersQuiz");
+  const getQuizQuestions = async () => {
+    try {
+      const response = await ApiData.post("/teachersQuiz");
 
-            console.log(response.data.allData);
+      const formatQuizData = (data) => {
+        const result = [];
 
-            const formatQuizData = (data) => {
-                const result = [];
+        data.forEach((item) => {
+          let question = result.find(q => q.id === item.question_id);
 
-                data.forEach((item) => {
-                    let question = result.find(q => q.id === item.question_id);
-
-                    if (!question) {
-                        question = {
-                            id: item.question_id,
-                            question: item.question,
-                            options: []
-                        };
-                        result.push(question);
-                    }
-
-                    question.options.push(item.option_text);
-                });
-
-                return result;
+          if (!question) {
+            question = {
+              id: item.question_id,
+              question: item.question,
+              options: []
             };
+            result.push(question);
+          }
 
-            const formatted = formatQuizData(response.data.allData);
+          question.options.push({
+            text: item.option_text,
+            is_correct: item.is_correct
+          });
+        });
 
-            console.log("formatted:", formatted);
+        return result;
+      };
 
-            setQuiz(formatted);
+      const formatted = formatQuizData(response.data.allData);
+      setQuiz(formatted);
 
-        } catch (err) {
-            console.error(err.message);
-        }
-    };
-    return (
-        <div className=" felx justify-center bg-gray-100 p-6 w-full h-full">
-  <h1 className="text-2xl font-bold text-center mb-6">
-    Quiz Questions
-  </h1>
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
 
-  <div className="max-w-2xl mx-auto space-y-6">
-    {quiz.map((q, index) => (
-      <div key={q.id} className="bg-white shadow-md rounded-xl p-5">
+  // 🔹 Select Answer
+  const handleSelect = (questionId, optionText) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: optionText
+    }));
+  };
+
+  // 🔹 Submit Quiz
+  const handleSubmit = () => {
+    let total = 0;
+
+    quiz.forEach((q) => {
+      const correct = q.options.find(opt => opt.is_correct);
+
+      if (correct && answers[q.id] === correct.text) {
+        total++;
+      }
+    });
+
+    setScore(total);
+  };
+
+  return (
+    <div className="min-h-screen bg-gray-100 p-6">
+      
+      <h1 className="text-2xl font-bold text-center mb-6">
+        Quiz Questions
+      </h1>
+
+      <div className="space-y-4">
         
-        <h2 className="text-lg font-semibold mb-4">
-          {index + 1}. {q.question}
-        </h2>
+        {quiz.map((q, index) => (
+          <div key={q.id} className="bg-white shadow-md rounded-xl p-5">
+            
+            <h2 className="text-lg font-semibold mb-4">
+              {index + 1}. {q.question}
+            </h2>
 
-        <div className="space-y-2">
-          {q.options.map((opt, i) => (
-            <label
-              key={i}
-              className="flex items-left gap-2 p-2 border rounded-lg cursor-pointer hover:bg-gray-50"
-            >
-              <input
-                type="radio"
-                name={`question-${q.id}`}
-                className="accent-blue-500"
-              />
-              <span>{opt}</span>
-            </label>
-          ))}
+            <div className="space-y-2">
+              {q.options.map((opt, i) => (
+                <label
+                  key={i}
+                  className={`flex items-center gap-2 p-2 cursor-pointer 
+                  ${score !== null && opt.is_correct ? "bg-green-100 border-green-400" : ""}
+                  ${score !== null && answers[q.id] === opt.text && !opt.is_correct ? "bg-red-100 border-red-400" : ""}
+                  hover:bg-gray-50`}
+                >
+                  <input
+                    type="radio"
+                    name={`question-${q.id}`}
+                    value={opt.text}
+                    checked={answers[q.id] === opt.text}
+                    onChange={() => handleSelect(q.id, opt.text)}
+                    disabled={score !== null}
+                    className="accent-blue-500"
+                  />
+                  <span>{opt.text}</span>
+                </label>
+              ))}
+            </div>
+
+          </div>
+        ))}
+
+        <div className="text-center">
+          <button
+            onClick={handleSubmit}
+            className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600"
+          >
+            Submit Quiz
+          </button>
         </div>
 
+
+        {score !== null && (
+          <h2 className="text-center text-xl font-bold mt-4">
+            Your Score: {score} / {quiz.length}
+          </h2>
+        )}
+
       </div>
-    ))}
-  </div>
-</div>
-  )
-};
+    </div>
+  );
+}
