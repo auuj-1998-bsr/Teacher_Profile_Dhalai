@@ -22,13 +22,12 @@ export default function TeachersQuiz() {
     }
     return (
         <>
-        <h1>hwlll</h1>
-        {/* <h1>Quiz Questions</h1>
+        <h1>Quiz Questions</h1>
         {quiz.map((q)=>{
             <div key={q.id}>
                 <p>{q.Questions}</p>
             </div>
-        })} */}
+        })}
         </>
     )
 };
