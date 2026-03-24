@@ -3,7 +3,7 @@ import db from "../database/db.js";
 export default async function updateTeacherInfo(req, res) {
      console.log("FILE:", req.file);
     const rowUpdate = await req.body;
-    const imageName = req.file ? req.file.filename : rowUpdate.image; // ** main file image 
+    const imageName = req.file ? req.file.filename : rowUpdate.image; 
     const id=Number(req.body.id);
     try {
         await db("history_profile_master").insert({

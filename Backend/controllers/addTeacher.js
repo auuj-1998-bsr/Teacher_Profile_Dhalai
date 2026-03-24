@@ -1,6 +1,6 @@
 import db from "../database/db.js";
-export default async function addTeacherData(req, res)  {
-    
+export default async function addTeacherData(req, res) {
+
     try {
         const teacherinfo = req.body.teacherinfo;
         const { id, ...data } = teacherinfo;

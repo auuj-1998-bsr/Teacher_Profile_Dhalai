@@ -1,6 +1,14 @@
 import db from "../database/db.js";
 export async function teacherQuestions(req, res) {
+    const teacher_code = req.body.teacher_code;
+    const resultStatus = req.body.resultStatus;
+    const score=req.body.score;
     try {
+        await db("result").insert({
+            // teacher_code: teacher_code,
+            resultStatus: resultStatus,
+            score:score,
+        });
         const allData = await db("questions as q")
             .join("options as o", "q.id", "o.question_id")
             .select(
@@ -8,7 +16,7 @@ export async function teacherQuestions(req, res) {
                 "q.question",
                 "o.id",
                 "o.option_text",
-                 "o.is_correct"
+                "o.is_correct"
             );
         res.status(200).json({ allData });
     } catch (err) {
