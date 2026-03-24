@@ -1,8 +1,8 @@
 import db from "../database/db.js";
 export async function teacherQuestions(req, res) {
     console.log(req.body);
-    const { resultStatus, score } = req.body;
-    if (resultStatus || score) {
+    const { resultStatus, score} = req.body;
+    if (resultStatus || score!==undefined) {
         try {
             await db("result").insert({
                 resultStatus: resultStatus,
@@ -11,7 +11,8 @@ export async function teacherQuestions(req, res) {
             res.status(201).json({ message: "Result Updated" })
         }
         catch (err) {
-            res.status(500).json({
+            console.error("ERROR:", err);
+            res.status(400).json({
                 error: "Result not Updated server Error",
                 details: err.message
             });
@@ -31,6 +32,7 @@ export async function teacherQuestions(req, res) {
             res.status(200).json({ allData });
         }
         catch (err) {
+            console.error("ERROR:", err);
             res.status(500).json({
                 error: "Internal server error",
                 details: err.message
