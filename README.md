@@ -117,6 +117,7 @@ Frontend: https://teacher-profile-dhalai.vercel.app
 
 <img width="1350" height="599" alt="Add New Teacher" src="https://github.com/user-attachments/assets/14372772-ee84-4383-b0f1-485952a41312" />
 <img width="1350" height="600" alt="Dashboard" src="https://github.com/user-attachments/assets/390bbc49-61ba-4fb3-9aad-d50f8e935d01" />
+<img width="1348" height="597" alt="Screenshot 2026-03-24 085925" src="https://github.com/user-attachments/assets/ebb91616-f187-414b-b606-e3456fc85e85" />
 
 
 ---
