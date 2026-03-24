@@ -189,7 +189,7 @@ function TeacherProfile() {
                     </tbody>
                 </table>
             </div>
-            <div className="flex justify-end gap-2">
+            <div className="flex justify-center gap-2">
                 <button className="px-3 py-1 border rounded" onClick={() => {
                     if (page > 1) { setPage(page - 1) }
                     else { alert("enter next button") }
