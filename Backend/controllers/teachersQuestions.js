@@ -2,7 +2,7 @@ import db from "../database/db.js";
 export async function teacherQuestions(req, res) {
     console.log(req.body);
     const { resultStatus, score } = req.body;
-    if (!resultStatus || score === null) {
+    if (resultStatus || score) {
         try {
             await db("result").insert({
                 resultStatus: resultStatus,
