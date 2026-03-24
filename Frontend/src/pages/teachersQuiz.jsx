@@ -9,7 +9,7 @@ export default function TeachersQuiz() {
 
     useEffect(() => {
         getQuizQuestions();
-    }, [resultStatus]);
+    }, []);
     console.log(answers);
     const getQuizQuestions = async () => {
         try {
@@ -58,6 +58,7 @@ export default function TeachersQuiz() {
         });
         setScore(total);
         setResultStatus(total == null ? "Panding" : total >= 7 ? "Pass" : "Fail");
+        getQuizQuestions();
     };
 
     return (
@@ -105,7 +106,7 @@ export default function TeachersQuiz() {
                         onClick={handleSubmit}
                         className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600"
                     >
-                        Submit Quiz
+                       {resultStatus?"Submited Quiz":"Submit Quiz"}
                     </button>
                 </div>
 
