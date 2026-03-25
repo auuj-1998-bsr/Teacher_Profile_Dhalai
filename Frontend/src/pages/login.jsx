@@ -4,7 +4,7 @@ import { ApiData } from "../services/api";
 
 export default function LoginPage() {
   const [form, setForm] = useState({
-    loginType: "teacher",
+    loginType: "",
     teacher_code: "",
     password: "",
   });
@@ -49,7 +49,7 @@ setLoading(true);
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-        <h3 className="text-2xl font-bold text-center"> Teacher Info</h3>
+        <h3 className="text-2xl font-bold text-center"> School Teacher Managment</h3>
         <h2 className="text-2xl font-bold text-center mb-6">
           Login
         </h2>

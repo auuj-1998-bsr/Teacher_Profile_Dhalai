@@ -6,14 +6,18 @@ export default function TeachersQuiz() {
     const [answers, setAnswers] = useState({});
     const [score, setScore] = useState(null);
     const [resultStatus, setResultStatus] = useState(null);
-
     useEffect(() => {
         getQuizQuestions();
-    }, []);
+    }, [score]);
     console.log(answers);
     const getQuizQuestions = async () => {
         try {
-            const response = await ApiData.post("/teachersQuiz", resultStatus,score);
+            const response = await ApiData.post("/teachersQuiz",
+                {
+                    resultStatus:resultStatus,
+                    score:score
+                }
+            );
             const formatQuizData = (data) => {
                 const result = [];
                 data.forEach((item) => {
@@ -58,7 +62,7 @@ export default function TeachersQuiz() {
         });
         setScore(total);
         setResultStatus(total == null ? "Panding" : total >= 7 ? "Pass" : "Fail");
-        getQuizQuestions();
+        // getQuizQuestions();
     };
 
     return (
@@ -104,9 +108,10 @@ export default function TeachersQuiz() {
                 <div className="text-center">
                     <button
                         onClick={handleSubmit}
-                        className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600"
+                        disabled={resultStatus}
+                        className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600 " 
                     >
-                       {resultStatus?"Submited Quiz":"Submit Quiz"}
+                        {resultStatus ? "Submited Quiz" : "Submit Quiz"}
                     </button>
                 </div>
 

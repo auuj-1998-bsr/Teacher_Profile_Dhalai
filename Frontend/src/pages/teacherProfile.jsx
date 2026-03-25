@@ -40,7 +40,8 @@ function TeacherProfile() {
         }
     }
     //pdf
-    const handleTeacherReports = async (type) => {;
+    const handleTeacherReports = async (type) => {
+        ;
         try {
             const response = await ApiData.post("/profile",
                 {

@@ -7,7 +7,7 @@ export const loginTeacher = async (req, res) => {
   const { loginType, teacher_code, password } = req.body;
   const hash = await bcrypt.hash("123456", 10);
   const teacher = await db("profile_master").where("teacher_code", teacher_code).first();
-
+try{
   if (!teacher)
     return res.status(401).json({ message: "Teacher_Code not found" });
 
@@ -34,4 +34,8 @@ export const loginTeacher = async (req, res) => {
     device: device,
   })
   res.json({ token, teacher: { name: teacher.teacher_name }, message: "Login_Success" });
+}
+catch(err){
+  res.status(500).json({message:err});
+}
 };

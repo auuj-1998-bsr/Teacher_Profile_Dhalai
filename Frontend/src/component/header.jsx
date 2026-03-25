@@ -12,8 +12,8 @@ const Header = () => {
   return (
     <header className="h-18 bg-white-400 text-black flex items-center justify-between px-6">
      <img src={`${import.meta.env.VITE_API_URL}/uploads/MOe_logo.png`}className="h-16 w-35" alt="" />
-      <h1 className="text-2xl font-semibold pl-10 ">
-       School Teacher Information
+      <h1 className="text-3xl font-semibold pl-10 ">
+       School Teacher Managment
       </h1>
 
       <button
