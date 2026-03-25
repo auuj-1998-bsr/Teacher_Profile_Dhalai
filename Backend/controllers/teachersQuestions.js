@@ -26,7 +26,7 @@ export async function teacherQuestions(req, res) {
                 .where("teacher_code", teacher_code)
                 .first();
                 const result="Completed";
-             if (resultData && resultData.result_status === "Pass") {
+             if (resultData.result_status === "Pass") {
             return res.status(200).json({ result });
         }
             else {
