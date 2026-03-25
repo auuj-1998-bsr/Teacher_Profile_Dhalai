@@ -16,6 +16,7 @@ export default function TeachersQuiz() {
     const getQuizQuestions = async () => {
         const token = localStorage.getItem("token");
         const decoded = jwtDecode(token);
+        console.log(decoded.teacher_code);
         try {
             const response = await ApiData.post("/teachersQuiz",
                 {
@@ -24,6 +25,8 @@ export default function TeachersQuiz() {
                     teacher_code: decoded.teacher_code,
                 }
             );
+             setQuizStatus(response.data.result);
+            console.log(response.data)
             const formatQuizData = (data) => {
                 const result = [];
                 data.forEach((item) => {
@@ -46,7 +49,6 @@ export default function TeachersQuiz() {
 
             const formatted = formatQuizData(response.data.allData);
             setQuiz(formatted);
-            setQuizStatus(response.data.result);
         } catch (err) {
             console.error(err.message);
         }
@@ -71,14 +73,13 @@ export default function TeachersQuiz() {
         setResultStatus(total == null ? "Panding" : total >= 7 ? "Pass" : "Fail");
         // getQuizQuestions();
     };
-
     return (
         <div className="min-h-screen bg-gray-100 p-6">
 
             <h1 className="text-2xl font-bold text-center mb-6">
                 Quiz Questions
             </h1>
-            {quiz?
+            {quiz.length>0?
             <div className="space-y-4">
                 {quiz.map((q, index) => (
                     <div key={q.id} className="bg-white shadow-md rounded-xl p-5">
