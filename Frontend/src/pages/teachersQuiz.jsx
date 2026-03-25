@@ -1,21 +1,26 @@
 import { useState, useEffect } from "react";
 import { ApiData } from "../services/api";
+import { useParams } from "react-router-dom";
 
 export default function TeachersQuiz() {
+    const { teacher_code } = useParams();
     const [quiz, setQuiz] = useState([]);
     const [answers, setAnswers] = useState({});
     const [score, setScore] = useState(null);
     const [resultStatus, setResultStatus] = useState(null);
+
     useEffect(() => {
         getQuizQuestions();
     }, [score]);
-    console.log(answers);
+    
     const getQuizQuestions = async () => {
+        console.log(teacher_code);
         try {
             const response = await ApiData.post("/teachersQuiz",
                 {
-                    resultStatus:resultStatus,
-                    score:score
+                    resultStatus: resultStatus,
+                    score: score,
+                    teacher_code: teacher_code
                 }
             );
             const formatQuizData = (data) => {
@@ -109,7 +114,7 @@ export default function TeachersQuiz() {
                     <button
                         onClick={handleSubmit}
                         disabled={resultStatus}
-                        className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600 " 
+                        className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600 "
                     >
                         {resultStatus ? "Submited Quiz" : "Submit Quiz"}
                     </button>

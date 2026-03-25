@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { ApiData } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [form, setForm] = useState({
@@ -12,15 +13,16 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const navigate = useNavigate();
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
-  }
+  };
 
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
-setLoading(true);
+    setLoading(true);
+    navigate(form.teacher_code);
     if (!form.loginType) {
       setError("Please select Admin or Teacher");
       return;
@@ -36,15 +38,15 @@ setLoading(true);
         window.location.href = "/";
       }
     } catch (err) {
-       console.log(err)
-       if (err.response?.data?.message) {
-    setError(err.response.data.message);
-  } else{
-   
-      setError("Server error");
+      console.log(err)
+      if (err.response?.data?.message) {
+        setError(err.response.data.message);
+      } else {
+
+        setError("Server error");
+      }
     }
   }
-}
 
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -53,7 +55,7 @@ setLoading(true);
         <h2 className="text-2xl font-bold text-center mb-6">
           Login
         </h2>
- 
+
         <div className="flex justify-center gap-6 mb-5">
 
           <label>
@@ -116,7 +118,7 @@ setLoading(true);
           </div>
 
           <button className="w-full bg-indigo-600 text-white p-3 rounded-lg">
-            {loading?"Login...":`Login as ${form.loginType}`}
+            {loading ? "Login..." : `Login as ${form.loginType}`}
           </button>
         </form>
       </div>
