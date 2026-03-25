@@ -39,7 +39,7 @@ export async function teacherQuestions(req, res) {
                         "o.option_text",
                         "o.is_correct"
                     );
-                return res.status(200).json({ result }); 
+                return res.status(200).json({ allData }); 
             }
         }
         catch (err) {
