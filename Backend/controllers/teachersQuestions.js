@@ -22,7 +22,7 @@ export async function teacherQuestions(req, res) {
     }
     else {
         try {
-            const resultData = await db("reult)").select("*")
+            const resultData = await db("result)").select("*")
             if (teacher_code === resultData.teacher_code && resultData.result_status === "Pass") {
                 const result = "Completed"
                 res.status(200).json({ result });
