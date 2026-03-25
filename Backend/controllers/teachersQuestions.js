@@ -25,10 +25,8 @@ export async function teacherQuestions(req, res) {
             const resultData = await db("result")
                 .where("teacher_code", teacher_code)
                 .first();
-                const result="Completed";
-                console.log("resultData:", resultData);
              if (resultData && resultData.result_status === "Pass") {
-            return res.status(200).json({ result });
+            return res.status(200).json({ resultData });
         }
             else {
                 const allData = await db("questions as q")
