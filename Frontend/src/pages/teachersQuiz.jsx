@@ -7,6 +7,7 @@ export default function TeachersQuiz() {
     const [answers, setAnswers] = useState({});
     const [score, setScore] = useState(null);
     const [resultStatus, setResultStatus] = useState(null);
+    const [quizStatus,setQuizStatus]=useState([]);
 
     useEffect(() => {
         getQuizQuestions();
@@ -20,7 +21,7 @@ export default function TeachersQuiz() {
                 {
                     resultStatus: resultStatus,
                     score: score,
-                    teacher_code: decoded.teacher_code
+                    teacher_code: decoded.teacher_code,
                 }
             );
             const formatQuizData = (data) => {
@@ -45,6 +46,7 @@ export default function TeachersQuiz() {
 
             const formatted = formatQuizData(response.data.allData);
             setQuiz(formatted);
+            setQuizStatus(response.data.result);
         } catch (err) {
             console.error(err.message);
         }
@@ -76,6 +78,7 @@ export default function TeachersQuiz() {
             <h1 className="text-2xl font-bold text-center mb-6">
                 Quiz Questions
             </h1>
+            {quiz?
             <div className="space-y-4">
                 {quiz.map((q, index) => (
                     <div key={q.id} className="bg-white shadow-md rounded-xl p-5">
@@ -120,7 +123,6 @@ export default function TeachersQuiz() {
                     </button>
                 </div>
 
-
                 {score !== null && (
                     <h2 className="text-center text-xl font-bold mt-4">
                         Score: {score} / {quiz.length}  Result: {score > 7 ? "Pass" : "Fail"}
@@ -128,6 +130,7 @@ export default function TeachersQuiz() {
                 )}
 
             </div>
+            : <h1>{quizStatus}</h1>}
         </div>
     );
 }
