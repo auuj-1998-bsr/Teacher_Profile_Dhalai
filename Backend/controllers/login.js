@@ -15,7 +15,7 @@ try{
   if (!isMatch)
     return res.status(401).json({ message: "Wrong password" });
 
-  const token = jwt.sign({teacher_code:teacher_code, name: teacher.name },
+  const token = jwt.sign({teacher_code:teacher_code, teacher_name: teacher.teacher_name },
     "mysecret123",
     { expiresIn: "1d" }
   );

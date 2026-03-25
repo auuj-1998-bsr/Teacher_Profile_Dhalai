@@ -16,7 +16,7 @@ export default function TeachersQuiz() {
     const getQuizQuestions = async () => {
         const token = localStorage.getItem("token");
         const decoded = jwtDecode(token);
-        console.log(decoded.teacher_code);
+        console.log(decoded);
         try {
             const response = await ApiData.post("/teachersQuiz",
                 {
@@ -142,7 +142,7 @@ export default function TeachersQuiz() {
                     </p>
 
                     <h2 className="text-2xl font-semibold text-black mb-4">
-                        "Anuj Kumar"
+                        {quizStatus.teacher_code}
                     </h2>
 
                     <p className="text-gray-600 mb-4">
