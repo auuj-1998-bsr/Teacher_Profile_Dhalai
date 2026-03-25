@@ -1,12 +1,13 @@
 import db from "../database/db.js";
 export async function teacherQuestions(req, res) {
     console.log(req.body);
-    const { resultStatus, score} = req.body;
+    const { resultStatus, score,teacher_code} = req.body;
     if (resultStatus && score!==undefined) {
         try {
             await db("result").insert({
                 result_status: resultStatus,
                 score: score,
+                teacher_code:teacher_code,
             });
             res.status(201).json({ message: "Result Updated" })
         }
