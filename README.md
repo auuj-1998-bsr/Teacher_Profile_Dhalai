@@ -114,10 +114,11 @@ Frontend: https://teacher-profile-dhalai.vercel.app
 
 ## Screenshots
 
-<img width="1364" height="597" alt="Login Page" src="https://github.com/user-attachments/assets/61460fa0-7d13-429f-b30e-6eb84f1a147d" />
+<img width="1363" height="599" alt="Screenshot 2026-03-25 110353" src="https://github.com/user-attachments/assets/de6a652f-5bec-4c03-aa42-a99ec41cc00d" />
+<img width="1348" height="597" alt="Screenshot 2026-03-25 110452" src="https://github.com/user-attachments/assets/c6d66b03-121c-439e-8d11-af0dab586954" />
+<img width="1348" height="593" alt="Screenshot 2026-03-25 110512" src="https://github.com/user-attachments/assets/d7717343-216a-4431-9cc3-c0567d5f0e88" />
+<img width="1349" height="599" alt="Screenshot 2026-03-25 110526" src="https://github.com/user-attachments/assets/ee43a7c2-2e27-4faa-a13b-5dfad6624bfe" />
 
-<img width="1350" height="599" alt="Add New Teacher" src="https://github.com/user-attachments/assets/14372772-ee84-4383-b0f1-485952a41312" />
-<img width="1350" height="600" alt="Dashboard" src="https://github.com/user-attachments/assets/390bbc49-61ba-4fb3-9aad-d50f8e935d01" />
 <img width="1348" height="597" alt="Screenshot 2026-03-24 085925" src="https://github.com/user-attachments/assets/66daeb40-dacb-4c3c-8638-254fe700c093" />
 
 
