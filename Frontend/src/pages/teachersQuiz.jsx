@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { ApiData } from "../services/api";
-import { useParams } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
 
 export default function TeachersQuiz() {
-    const { teacher_code } = useParams();
     const [quiz, setQuiz] = useState([]);
     const [answers, setAnswers] = useState({});
     const [score, setScore] = useState(null);
@@ -12,15 +11,16 @@ export default function TeachersQuiz() {
     useEffect(() => {
         getQuizQuestions();
     }, [score]);
-    
+
     const getQuizQuestions = async () => {
-        console.log(teacher_code);
+        const token = localStorage.getItem("token");
+        const decoded = jwtDecode(token);
         try {
             const response = await ApiData.post("/teachersQuiz",
                 {
                     resultStatus: resultStatus,
                     score: score,
-                    teacher_code: teacher_code
+                    teacher_code: decoded.teacher_code
                 }
             );
             const formatQuizData = (data) => {

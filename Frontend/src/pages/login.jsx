@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { ApiData } from "../services/api";
-import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
   const [form, setForm] = useState({
@@ -13,7 +12,7 @@ export default function LoginPage() {
   const [showPass, setShowPass] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+
   function handleChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -22,7 +21,7 @@ export default function LoginPage() {
     e.preventDefault();
     setError("");
     setLoading(true);
-    navigate(form.teacher_code);
+
     if (!form.loginType) {
       setError("Please select Admin or Teacher");
       return;
@@ -30,9 +29,11 @@ export default function LoginPage() {
     try {
       const res = await ApiData.post("/login", form);
       const data = res.data;
+      
       if (!res.data) {
         setError(data.message);
         setLoading(false);
+        console.log(data);
       } else {
         localStorage.setItem("token", data.token);
         window.location.href = "/";
