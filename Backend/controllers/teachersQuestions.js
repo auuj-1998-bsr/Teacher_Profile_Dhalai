@@ -22,24 +22,13 @@ export async function teacherQuestions(req, res) {
     }
     else {
         try {
-            const resultData = await db("result").select("*")
+            const resultData = await db("result")
+                .where("teacher_code", teacher_code)
+                .first();
             if (teacher_code === resultData.teacher_code && resultData.result_status === "Pass") {
                 const result = "Completed"
-                res.status(200).json({ result });
+                return res.status(200).json({ result });
             }
-            // else if (teacher_code === resultData.teacher_code && resultData.result_status === "Fail") {
-            //     const attempt = resultData.attempt;
-            //     const allData = await db("questions as q")
-            //         .join("options as o", "q.id", "o.question_id")
-            //         .select(
-            //             "q.id as question_id",
-            //             "q.question",
-            //             "o.id",
-            //             "o.option_text",
-            //             "o.is_correct"
-            //         );
-            //     res.status(200).json({ allData });
-            // }
             else {
                 const allData = await db("questions as q")
                     .join("options as o", "q.id", "o.question_id")
@@ -50,7 +39,7 @@ export async function teacherQuestions(req, res) {
                         "o.option_text",
                         "o.is_correct"
                     );
-                res.status(200).json({ allData });
+                return res.status(200).json({ result }); res.status(200).json({ allData });
             }
         }
         catch (err) {
