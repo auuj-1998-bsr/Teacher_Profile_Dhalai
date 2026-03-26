@@ -16,7 +16,6 @@ export default function TeachersQuiz() {
     const getQuizQuestions = async () => {
         const token = localStorage.getItem("token");
         const decoded = jwtDecode(token);
-        console.log(decoded);
         try {
             const response = await ApiData.post("/teachersQuiz",
                 {
@@ -25,8 +24,7 @@ export default function TeachersQuiz() {
                     teacher_code: decoded.teacher_code,
                 }
             );
-            setQuizStatus(response.data.resultData);
-            console.log(response.data)
+            setQuizStatus({...response.data.resultData,...decoded});
             const formatQuizData = (data) => {
                 const result = [];
                 data.forEach((item) => {
@@ -73,6 +71,7 @@ export default function TeachersQuiz() {
         setResultStatus(total == null ? "Panding" : total >= 7 ? "Pass" : "Fail");
         // getQuizQuestions();
     };
+    console.log(quizStatus);
     return (
         <div className="min-h-screen bg-gray-100 p-6">
 
@@ -141,8 +140,8 @@ export default function TeachersQuiz() {
                         This is to certify that
                     </p>
 
-                    <h2 className="text-2xl font-semibold text-black mb-4">
-                        {quizStatus.teacher_code}
+                    <h2 className="text-2xl font-semibold text-red-500 mb-4">
+                        {quizStatus.teacher_name}
                     </h2>
 
                     <p className="text-gray-600 mb-4">
