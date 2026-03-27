@@ -18,7 +18,6 @@ export async function teacherQuestions(req, res) {
                     attempt: attempt
                 });
             res.status(201).json({ message: "Result insert row" })
-
         }
         catch (err) {
             console.error("ERROR:", err);
