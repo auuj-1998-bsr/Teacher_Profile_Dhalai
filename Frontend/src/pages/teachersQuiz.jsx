@@ -22,6 +22,7 @@ export default function TeachersQuiz() {
                     resultStatus: resultStatus,
                     score: score,
                     teacher_code: decoded.teacher_code,
+                    attempt:1,
                 }
             );
             setQuizStatus({...response.data.resultData,...decoded});

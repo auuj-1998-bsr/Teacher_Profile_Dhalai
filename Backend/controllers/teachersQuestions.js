@@ -4,7 +4,7 @@ export async function teacherQuestions(req, res) {
     const { resultStatus, score, teacher_code, attempt } = req.body;
     if (resultStatus && score !== undefined) {
         try {
-            if (teacher_code) {
+            if (attempt) {
                 await db("result")
                     .where("teacher_code", teacher_code)
                     .update({
