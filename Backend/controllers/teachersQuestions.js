@@ -12,7 +12,7 @@ export async function teacherQuestions(req, res) {
                         score: score,
                         attempt: attempt
                     });
-                     res.status(201).json({ message: "Result Updated" })
+                     res.status(201).json({ message: "Result row Updated" })
                 }
               else{  await db("result").insert({
                     result_status: resultStatus,
@@ -20,7 +20,7 @@ export async function teacherQuestions(req, res) {
                     teacher_code: teacher_code,
                     attempt: attempt
                 });
-                res.status(201).json({ message: "Result Updated" })
+                res.status(201).json({ message: "Result insert row"})
             }
             }
         catch (err) {
