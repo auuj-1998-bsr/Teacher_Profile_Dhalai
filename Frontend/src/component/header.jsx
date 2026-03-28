@@ -1,27 +1,16 @@
-import { useNavigate } from "react-router-dom";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSchool
+} from "@fortawesome/free-solid-svg-icons";
 const Header = () => {
-  const navigate = useNavigate();
 
-
-  //Logout function 
-  const handleLogout=()=>{
-    localStorage.removeItem("token");
-    navigate("/login");
-  }
   return (
-    <header className="h-18 bg-white-400 text-black flex items-center justify-between px-6">
-     <img src={`${import.meta.env.VITE_API_URL}/uploads/MOe_logo.png`}className="h-16 w-35" alt="" />
+    <header className="h-17 bg-white-400 text-black flex items-center justify-between px-6 pr-100">
+      <img src={`${import.meta.env.VITE_API_URL}/uploads/MOe_logo.png`} className="h-16 w-40" alt="" />
       <h1 className="text-3xl font-semibold pl-10 ">
-       School Teacher Managment
+        <FontAwesomeIcon icon={faSchool} />
+        School Teacher Managment
       </h1>
-
-      <button
-        onClick={handleLogout}
-        className="bg-blue-500 px-4 py-1 rounded-lg hover:bg-blue-600"
-      >
-        Logout
-      </button>
     </header>
   );
 };
