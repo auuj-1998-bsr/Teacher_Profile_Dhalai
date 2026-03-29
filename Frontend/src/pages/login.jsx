@@ -30,7 +30,7 @@ export default function LoginPage() {
     try {
       const res = await ApiData.post("/login", form);
       const data = res.data;
-      
+
       if (!res.data) {
         setError(data.message);
         setLoading(false);
@@ -51,90 +51,90 @@ export default function LoginPage() {
   }
 
   return (
-  <div className="min-h-screen flex items-center justify-center 
+    <div className="min-h-screen flex items-center justify-center 
   bg-gradient-to-br from-blue-200 via-indigo-200 to-purple-200">
 
-    <div className="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">
-      
-      <h3 className="text-2xl font-bold text-center text-gray-700">
-      🎓 School Teacher Management
-      </h3>
+      <div className="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">
 
-      <h2 className="text-xl font-semibold text-center mb-6 text-gray-600">
-        
-      </h2>
+        <h3 className="text-2xl font-bold text-center text-gray-700">
+          🎓 School Teacher Management
+        </h3>
 
-      <div className="flex justify-center gap-6 mb-5">
+        <h2 className="text-xl font-semibold text-center mb-6 text-gray-600">
 
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="radio"
-            name="loginType"
-            value="admin"
-            checked={form.loginType === "admin"}
-            onChange={handleChange}
-          />
-          Admin
-        </label>
+        </h2>
 
-        <label className="flex items-center gap-2 cursor-pointer">
-          <input
-            type="radio"
-            name="loginType"
-            value="teacher"
-            checked={form.loginType === "teacher"}
-            onChange={handleChange}
-          />
-          Teacher
-        </label>
+        <div className="flex justify-center gap-6 mb-5">
 
-      </div>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="loginType"
+              value="admin"
+              checked={form.loginType === "admin"}
+              onChange={handleChange}
+            />
+            Admin
+          </label>
 
-      {error && (
-        <div className="bg-red-100 text-red-700 p-2 mb-4 rounded text-sm">
-          {error}
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="loginType"
+              value="teacher"
+              checked={form.loginType === "teacher"}
+              onChange={handleChange}
+            />
+            Teacher
+          </label>
+
         </div>
-      )}
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+        {error && (
+          <div className="bg-red-100 text-red-700 p-2 mb-4 rounded text-sm">
+            {error}
+          </div>
+        )}
 
-        <input
-          type="text"
-          name="teacher_code"
-          placeholder={form.loginType === "admin" ? "Admin ID" : "Teacher Code"}
-          value={form.teacher_code}
-          onChange={handleChange}
-          className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-          required
-        />
+        <form onSubmit={handleSubmit} className="space-y-4">
 
-        <div className="relative">
           <input
-            type={showPass ? "text" : "password"}
-            name="password"
-            placeholder="Password"
-            value={form.password}
+            type="text"
+            name="teacher_code"
+            placeholder={form.loginType === "admin" ? "Admin ID" : "Teacher Code"}
+            value={form.teacher_code}
             onChange={handleChange}
             className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
             required
           />
 
-          <span
-            onClick={() => setShowPass(prev => !prev)}
-            className="absolute right-3 top-3 cursor-pointer text-gray-500"
-          >
-            {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
-          </span>
-        </div>
+          <div className="relative">
+            <input
+              type={showPass ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+              required
+            />
 
-        <button className="w-full bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition">
-          {loading ? "Login..." : `Login as ${form.loginType}`}
-        </button>
-      </form>
-       <p className="text-center text-sm mt-5 text-black/70">
-        Secure Login 🔐
-      </p>
+            <span
+              onClick={() => setShowPass(prev => !prev)}
+              className="absolute right-3 top-3 cursor-pointer text-gray-500"
+            >
+              {showPass ? <EyeOff size={18} /> : <Eye size={18} />}
+            </span>
+          </div>
+
+          <button className="w-full bg-indigo-600 text-white p-3 rounded-lg hover:bg-indigo-700 transition">
+            {loading ? "Login..." : `Login as ${form.loginType}`}
+          </button>
+        </form>
+        <p className="text-center text-sm mt-5 text-black/70">
+          Secure Login 🔐
+        </p>
+      </div>
     </div>
-  </div>
-);
+  );
 }

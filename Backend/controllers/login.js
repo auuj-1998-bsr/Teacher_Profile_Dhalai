@@ -6,16 +6,17 @@ import { UAParser } from "ua-parser-js";
 export const loginTeacher = async (req, res) => {
   const { loginType, teacher_code, password } = req.body;
   const hash = await bcrypt.hash("123456", 10);
+  const admin=loginType;
   const teacher = await db("profile_master").where("teacher_code", teacher_code).first();
 try{
-  if (!teacher)
-    return res.status(401).json({ message: "Teacher_Code not found" });
+  if (!teacher||admin)
+    return res.status(401).json({ message: "Adim or Teacher not found" });
 
   const isMatch = await bcrypt.compare(password, hash);
   if (!isMatch)
     return res.status(401).json({ message: "Wrong password" });
 
-  const token = jwt.sign({teacher_code:teacher_code, teacher_name: teacher.teacher_name },
+  const token = jwt.sign({teacher_code:teacher_code, teacher_name: teacher. },
     "mysecret123",
     { expiresIn: "1d" }
   );
