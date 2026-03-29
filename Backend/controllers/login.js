@@ -9,7 +9,7 @@ export const loginTeacher = async (req, res) => {
   const admin=loginType;
   const teacher = await db("profile_master").where("teacher_code", teacher_code).first();
 try{
-  if (!teacher||admin)
+  if (!teacher||admin==="admin")
     return res.status(401).json({ message: "Adim or Teacher not found" });
 
   const isMatch = await bcrypt.compare(password, hash);
