@@ -36,9 +36,6 @@ export async function teacherQuestions(req, res) {
                 return res.status(200).json({ resultData });
             }
             else {
-                const attempt=await db("result")
-                .where("teacher_code", attempt)
-                .first();
                 const allData = await db("questions as q")
                     .join("options as o", "q.id", "o.question_id")
                     .select(
@@ -48,7 +45,7 @@ export async function teacherQuestions(req, res) {
                         "o.option_text",
                         "o.is_correct"
                     );
-                return res.status(200).json({ allData,attempt });
+                return res.status(200).json({ allData });
             }
         }
         catch (err) {
