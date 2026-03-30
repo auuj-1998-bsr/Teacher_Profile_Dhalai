@@ -14,6 +14,7 @@ Users can create, edit, view, and manage teacher information with image upload a
 *  Add / Edit / Delete Teacher Profiles
 *  Upload and Preview Teacher Images
 *  Download Reports (Excel / PDF)
+*  Question Quiz Test (Certificate)
 *  REST API Integration
 *  PostgreSQL Database
 *  Login Tracking (IP, Browser, Device)
