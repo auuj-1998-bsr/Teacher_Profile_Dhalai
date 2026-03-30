@@ -1,11 +1,12 @@
-# Teacher Profile Management System
+# School Teacher Management System
 
 ##  Project Overview
 
 Teacher Profile Management System is a full-stack web application that allows administrators to manage teacher profiles efficiently.
 Users can create, edit, view, and manage teacher information with image upload and authentication features.
 
----// Username:man1998, password:123456
+---// Username:man1998
+      password:123456
 
 ##  Features
 
@@ -13,6 +14,7 @@ Users can create, edit, view, and manage teacher information with image upload a
 *  Add / Edit / Delete Teacher Profiles
 *  Upload and Preview Teacher Images
 *  Download Reports (Excel / PDF)
+*  Question Quiz Test (Certificate)
 *  REST API Integration
 *  PostgreSQL Database
 *  Login Tracking (IP, Browser, Device)
@@ -66,24 +68,6 @@ Teacher-Profile-System
 
 ---
 
-## ⚙️ Environment Variables
-
-### Backend (.env)
-
-```
-DATABASE_URL=your_postgres_database_url
-JWT_SECRET=your_secret_key
-PORT=3400
-```
-
-### Frontend (.env)
-
-```
-VITE_API_URL=https://your-backend-url
-```
-
----
-
 ##  Run Project Locally
 
 ### Backend
@@ -113,12 +97,14 @@ Frontend: https://teacher-profile-dhalai.vercel.app
 
 ## Screenshots
 
-<img width="1363" height="599" alt="Screenshot 2026-03-25 110353" src="https://github.com/user-attachments/assets/de6a652f-5bec-4c03-aa42-a99ec41cc00d" />
+<img width="1364" height="596" alt="Screenshot 2026-03-30 125519" src="https://github.com/user-attachments/assets/98e1203b-94c5-40b2-9957-da3525d61e5f" />
+
 <img width="1348" height="597" alt="Screenshot 2026-03-25 110452" src="https://github.com/user-attachments/assets/c6d66b03-121c-439e-8d11-af0dab586954" />
 <img width="1348" height="593" alt="Screenshot 2026-03-25 110512" src="https://github.com/user-attachments/assets/d7717343-216a-4431-9cc3-c0567d5f0e88" />
 <img width="1349" height="599" alt="Screenshot 2026-03-25 110526" src="https://github.com/user-attachments/assets/ee43a7c2-2e27-4faa-a13b-5dfad6624bfe" />
 
 <img width="1348" height="597" alt="Screenshot 2026-03-24 085925" src="https://github.com/user-attachments/assets/66daeb40-dacb-4c3c-8638-254fe700c093" />
+
 
 ---
 
@@ -131,7 +117,7 @@ BCA Graduate | Full Stack Developer
 Skills:
 
 * React.js
-* Node.js
+* Node.js (Express.js)
 * PostgreSQL
 * REST APIs
 * Versel / Render Deployment
