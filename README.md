@@ -68,24 +68,6 @@ Teacher-Profile-System
 
 ---
 
-## ⚙️ Environment Variables
-
-### Backend (.env)
-
-```
-DATABASE_URL=your_postgres_database_url
-JWT_SECRET=your_secret_key
-PORT=3400
-```
-
-### Frontend (.env)
-
-```
-VITE_API_URL=https://your-backend-url
-```
-
----
-
 ##  Run Project Locally
 
 ### Backend
