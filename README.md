@@ -1,4 +1,4 @@
-# Teacher Profile Management System
+# School Teacher Management System
 
 ##  Project Overview
 
