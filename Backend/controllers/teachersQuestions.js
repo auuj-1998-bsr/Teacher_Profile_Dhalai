@@ -15,7 +15,7 @@ export async function teacherQuestions(req, res) {
                 .merge({
                     result_status: resultStatus,
                     score: score,
-                    attempt: attempt
+                   attempt: db.raw(`result.attempt + ${attempt}`)
                 });
             res.status(201).json({ message: "Result insert row" })
         }
