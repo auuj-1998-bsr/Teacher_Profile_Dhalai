@@ -95,6 +95,7 @@ function TeacherProfile() {
         setRowdata(data);
         setIsModalOpen(prev => !prev);
     }
+    console.log(localStorage.getItem("token"));
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">

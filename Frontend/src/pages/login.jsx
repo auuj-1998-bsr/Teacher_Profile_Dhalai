@@ -56,20 +56,16 @@ export default function LoginPage() {
 
       <div className="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">
 
-        <h3 className="text-2xl font-bold text-center text-gray-700">
+        <h3 className="text-2xl font-bold text-center text-gray-700 py-8">
           🎓 School Teacher Management
         </h3>
-
-        <h2 className="text-xl font-semibold text-center mb-6 text-gray-600">
-
-        </h2>
-
         <div className="flex justify-center gap-6 mb-5">
 
           <label className="flex items-center gap-2 cursor-pointer">
             <input
               type="radio"
               name="loginType"
+              disabled
               value="admin"
               checked={form.loginType === "admin"}
               onChange={handleChange}

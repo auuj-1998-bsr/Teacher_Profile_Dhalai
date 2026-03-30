@@ -22,10 +22,10 @@ export default function TeachersQuiz() {
                     resultStatus: resultStatus,
                     score: score,
                     teacher_code: decoded.teacher_code,
-                    attempt:1,
+                    attempt: 1,
                 }
             );
-            setQuizStatus({...response.data.resultData,...decoded});
+            setQuizStatus({ ...response.data.resultData, ...decoded });
             const formatQuizData = (data) => {
                 const result = [];
                 data.forEach((item) => {
