@@ -33,7 +33,7 @@ try{
     browser: browser,
     device: device,
   })
-  res.json({ token, teacher: { name: teacher.teacher_name }, message: "Login_Success" });
+  res.json({ token, message: "Login_Success" });
 }
 catch(err){
   res.status(500).json({message:err});
