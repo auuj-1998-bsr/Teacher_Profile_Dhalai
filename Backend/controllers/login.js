@@ -18,6 +18,7 @@ export const loginTeacher = async (req, res) => {
     const token = jwt.sign({
       teacher_code: teacher.teacher_code,
       teacher_name: teacher.teacher_name,
+      teacher:teacher,
     },
       "mysecret123",
       { expiresIn: "1d" }
