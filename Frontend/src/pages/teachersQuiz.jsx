@@ -72,6 +72,7 @@ export default function TeachersQuiz() {
         setResultStatus(total == null ? "Panding" : total >= 7 ? "Pass" : "Fail");
         // getQuizQuestions();
     };
+    console.log("quiz");
     console.log(quizStatus);
     return (
         <div className="min-h-screen bg-gray-100 p-6">

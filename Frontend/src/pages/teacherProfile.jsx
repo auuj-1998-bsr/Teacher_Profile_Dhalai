@@ -1,7 +1,7 @@
 import { ApiData } from "../services/api";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowRotateLeft, faFilePdf, faFileExcel, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRotateLeft, faFilePdf, faFileExcel } from "@fortawesome/free-solid-svg-icons";
 import { TeacherView } from "../component/teacherView";
 
 function TeacherProfile() {
@@ -41,7 +41,6 @@ function TeacherProfile() {
     }
     //pdf
     const handleTeacherReports = async (type) => {
-        ;
         try {
             const response = await ApiData.post("/profile",
                 {
@@ -96,6 +95,7 @@ function TeacherProfile() {
         setIsModalOpen(prev => !prev);
     }
     console.log(localStorage.getItem("token"));
+    console.log("helo")
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
