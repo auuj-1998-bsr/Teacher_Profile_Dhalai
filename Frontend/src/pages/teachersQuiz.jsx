@@ -8,6 +8,7 @@ export default function TeachersQuiz() {
     const [score, setScore] = useState(null);
     const [resultStatus, setResultStatus] = useState(null);
     const [quizStatus, setQuizStatus] = useState([]);
+    const [Certificate,setCertificate]=useState([]);
 
     useEffect(() => {
         getQuizQuestions();
@@ -18,17 +19,19 @@ export default function TeachersQuiz() {
         const decoded = jwtDecode(token);
         console.log(decoded);
         try {
-            if(decoded){
-            const response = await ApiData.post("/teachersQuiz",
-                {
-                    resultStatus: resultStatus,
-                    score: score,
-                    teacher_code: decoded.teacher_code,
-                    attempt: 1,
-                }
-            );
-            setQuizStatus({ ...response.data.resultData, ...decoded });
-        }
+            if (decoded) {
+                const response = await ApiData.post("/teachersQuiz",
+                    {
+                        resultStatus: resultStatus,
+                        score: score,
+                        teacher_code: decoded.teacher_code,
+                        teacher_name:decoded.teacher_name,
+                        attempt: 1,
+                    }
+                );
+                setQuizStatus(response.data.alltData );
+                setCertificate(response.data.resultData);
+            }
             const formatQuizData = (data) => {
                 const result = [];
                 data.forEach((item) => {
@@ -77,6 +80,7 @@ export default function TeachersQuiz() {
     };
     console.log("quiz");
     console.log(quizStatus);
+    console.log(Certificate);
     return (
         <div className="min-h-screen bg-gray-100 p-6">
 
@@ -122,8 +126,7 @@ export default function TeachersQuiz() {
                         <button
                             onClick={handleSubmit}
                             disabled={resultStatus}
-                            className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600 "
-                        >
+                            className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600 ">
                             {resultStatus ? "Submited Quiz" : "Submit Quiz"}
                         </button>
                     </div>
@@ -135,7 +138,8 @@ export default function TeachersQuiz() {
                     )}
 
                 </div>
-                : <div className="bg-white p-8 border-4 border-blue-500 rounded-xl shadow-lg text-center mx-auto mt-10">
+
+                : <div className="bg-white w-[600px] p-8 border-4 border-blue-500 rounded-xl shadow-lg text-center mx-auto mt-10">
 
                     <h1 className="text-3xl font-bold text-blue-600 mb-4">
                         Certificate of Achievement
@@ -146,7 +150,7 @@ export default function TeachersQuiz() {
                     </p>
 
                     <h2 className="text-2xl font-semibold text-red-500 mb-4">
-                        {quizStatus.teacher_name}
+                        {Certificate.teacher_name}
                     </h2>
 
                     <p className="text-gray-600 mb-4">
@@ -154,7 +158,7 @@ export default function TeachersQuiz() {
                     </p>
 
                     <p className="text-xl font-bold text-green-600 mb-6">
-                        Score: {quizStatus.score}/ 20
+                        Score: {Certificate.score}/ 20
                     </p>
 
                     <p className="text-lg text-gray-700 mb-8">
