@@ -29,7 +29,6 @@ function TeacherProfile() {
                 udiseCode: udiseCode,
                 gender: gender,
                 schooltype: schooltype,
-                doj: doj,
                 block: block,
             })
             setProfieData(response.data.teacherProfileData);
@@ -84,7 +83,6 @@ function TeacherProfile() {
     const handleReset = () => {
         setPage(1);
         setSchooltype("0");
-        setDoj("0");
         setGender("0");
         setBlock("0");
         setUdiseCode("0");
@@ -94,8 +92,6 @@ function TeacherProfile() {
         setRowdata(data);
         setIsModalOpen(prev => !prev);
     }
-    console.log(localStorage.getItem("token"));
-    console.log("helo")
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">
@@ -106,14 +102,6 @@ function TeacherProfile() {
                 </div>
             </div>
             <div className="bg-white p-4 rounded-lg shadow flex flex-wrap gap-2 ">
-                <select className="border rounded px-3 py-2 text-sm " value={doj} onChange={(e) => setDoj(e.target.value)}>
-                    <option value="0">DOJ Teacher</option>
-                    <option value="2020">2019</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
-                    <option value="2022">2022</option>
-                    <option value="2023">2023</option>
-                </select>
                 <select className="border rounded px-3 py-2 text-sm" value={udiseCode} onChange={(e) => setUdiseCode(e.target.value)}>
                     <option value="0">UDISE Code</option>
                     <option value="16030302001">16030302001</option>

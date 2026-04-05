@@ -16,7 +16,9 @@ export default function TeachersQuiz() {
     const getQuizQuestions = async () => {
         const token = localStorage.getItem("token");
         const decoded = jwtDecode(token);
+        console.log(decoded);
         try {
+            if(decoded){
             const response = await ApiData.post("/teachersQuiz",
                 {
                     resultStatus: resultStatus,
@@ -26,6 +28,7 @@ export default function TeachersQuiz() {
                 }
             );
             setQuizStatus({ ...response.data.resultData, ...decoded });
+        }
             const formatQuizData = (data) => {
                 const result = [];
                 data.forEach((item) => {
@@ -132,7 +135,7 @@ export default function TeachersQuiz() {
                     )}
 
                 </div>
-                : <div className="bg-white w-[600px] p-8 border-4 border-blue-500 rounded-xl shadow-lg text-center mx-auto mt-10">
+                : <div className="bg-white p-8 border-4 border-blue-500 rounded-xl shadow-lg text-center mx-auto mt-10">
 
                     <h1 className="text-3xl font-bold text-blue-600 mb-4">
                         Certificate of Achievement
