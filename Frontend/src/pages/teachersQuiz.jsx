@@ -29,6 +29,8 @@ export default function TeachersQuiz() {
                         attempt: 1,
                     }
                 );
+                console.log(response.data );
+                console.log(response.data.resultData);
                 setQuizStatus(response.data.alltData );
                 setCertificate(response.data.resultData);
             }
@@ -80,7 +82,7 @@ export default function TeachersQuiz() {
     };
     console.log("quiz");
     console.log(quizStatus);
-    console.log(Certificate);
+    console.log(Certificate);   
     return (
         <div className="min-h-screen bg-gray-100 p-6">
 
@@ -150,7 +152,7 @@ export default function TeachersQuiz() {
                     </p>
 
                     <h2 className="text-2xl font-semibold text-red-500 mb-4">
-                        {Certificate.teacher_name}
+                        {Certificate.teacher_code}
                     </h2>
 
                     <p className="text-gray-600 mb-4">
