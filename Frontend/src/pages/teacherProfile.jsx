@@ -73,7 +73,7 @@ function TeacherProfile() {
         }
         catch (err) {
             console.error(err);
-            alert("Download failed");
+            alert("Download failed....");
         }
         finally {
             setPdfLoading(false);
