@@ -12,18 +12,19 @@ const config = {
  },
 
  production: {
-    client: "pg",
-    connection: {
-      connectionString: process.env.DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false
-      }
-    },
-    pool: {
+  client: "pg",
+  connection: {
+   connectionString: process.env.DATABASE_URL,
+   ssl: {
+    require: true,
+    rejectUnauthorized: false
+   },
+     pool: {
       min: 0,
-      max: 5  
+      max: 2  
     }
   }
+ }
 
 };
 export default config;
