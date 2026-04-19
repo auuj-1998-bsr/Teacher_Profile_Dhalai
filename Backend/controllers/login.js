@@ -40,6 +40,7 @@ export const loginTeacher = async (req, res) => {
     res.json({ token, message: "Login_Success" });
   }
   catch (err) {
-    res.status(500).json({ message: "login faield Backend" });
+   console.error(err);
+    res.status(500).json({ error: err.message });
   }
 };
