@@ -12,19 +12,21 @@ const config = {
  },
 
  production: {
-  client: "pg",
-  connection: {
-   connectionString: process.env.DATABASE_URL,
-   ssl: {
-    require: true,
-    rejectUnauthorized: false
-   },
-     pool: {
+    client: "pg",
+    connection: {
+      connectionString: process.env.DATABASE_URL,
+      keepAlive: true   // 🔥 IMPORTANT FIX
+    },
+    pool: {
       min: 0,
-      max: 2  
+      max: 1,
+      createTimeoutMillis: 3000,
+      acquireTimeoutMillis: 10000,
+      idleTimeoutMillis: 10000,
+      reapIntervalMillis: 1000,
+      createRetryIntervalMillis: 2000
     }
   }
- }
 
 };
 export default config;
