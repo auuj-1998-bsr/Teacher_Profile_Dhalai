@@ -18,11 +18,7 @@ const config = {
    ssl: {
     require: true,
     rejectUnauthorized: false
-   },
-     pool: {
-      min: 0,
-      max: 2  
-    }
+   }
   }
  }
 
