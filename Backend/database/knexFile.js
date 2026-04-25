@@ -15,18 +15,17 @@ const config = {
     connection: {
       connectionString: process.env.DATABASE_URL,
       ssl: {
-        require: true,
-        rejectUnauthorized: false
+        rejectUnauthorized: false 
       }
     },
-    pool: {         
+    pool: {
       min: 0,
-      max: 2,         
+      max: 2,
       idleTimeoutMillis: 10000,
       createTimeoutMillis: 5000,
       acquireTimeoutMillis: 30000
     },
-    acquireConnectionTimeout: 30000 
+    acquireConnectionTimeout: 30000
   }
 };
 
