@@ -18,7 +18,15 @@ const config = {
    ssl: {
     require: true,
     rejectUnauthorized: false
-   }
+   },
+     pool: {
+      min: 0,
+      max: 1, 
+      idleTimeoutMillis: 3000,
+      createTimeoutMillis: 5000,
+      acquireTimeoutMillis: 10000,
+    },
+    acquireConnectionTimeout: 10000,
   }
  }
 
