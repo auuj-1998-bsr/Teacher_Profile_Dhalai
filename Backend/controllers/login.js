@@ -41,6 +41,10 @@ export const loginTeacher = async (req, res) => {
   }
   catch (err) {
   console.error("LOGIN ERROR:", err);
+     if (err.message.includes("Connection terminated")) {
+      return res.status(503).json({ 
+        error: "Database temporarily unavailable, please retry" 
+      });
     res.status(500).json({ error: err.message });
   }
 };

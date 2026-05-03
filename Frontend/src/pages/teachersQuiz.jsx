@@ -7,57 +7,58 @@ export default function TeachersQuiz() {
     const [answers, setAnswers] = useState({});
     const [score, setScore] = useState(null);
     const [resultStatus, setResultStatus] = useState(null);
-    const [quizStatus, setQuizStatus] = useState([]);
-    const [Certificate,setCertificate]=useState([]);
+    const [certificate, setCertificate] = useState(null);
+    const [submitted, setSubmitted] = useState(false);
 
     useEffect(() => {
         getQuizQuestions();
-    }, [score]);
+    }, []);
+
+    const formatQuizData = (data) => {
+        const result = [];
+        data.forEach((item) => {
+            let question = result.find(q => q.id === item.question_id);
+            if (!question) {
+                question = {
+                    id: item.question_id,
+                    question: item.question,
+                    options: []
+                };
+                result.push(question);
+            }
+            question.options.push({
+                id: item.id,
+                text: item.option_text,
+                is_correct: item.is_correct
+            });
+        });
+        return result;
+    };
 
     const getQuizQuestions = async () => {
-        const token = localStorage.getItem("token");
-        const decoded = jwtDecode(token);
-        console.log(decoded);
         try {
-            if (decoded) {
-                const response = await ApiData.post("/teachersQuiz",
-                    {
-                        resultStatus: resultStatus,
-                        score: score,
-                        teacher_code: decoded.teacher_code,
-                        teacher_name:decoded.teacher_name,
-                        attempt: 1,
-                    }
-                );
-                console.log(response.data );
-                console.log(response.data.resultData);
-                setQuizStatus(response.data.alltData );
-                setCertificate(response.data.resultData);
-            }
-            const formatQuizData = (data) => {
-                const result = [];
-                data.forEach((item) => {
-                    let question = result.find(q => q.id === item.question_id);
-                    if (!question) {
-                        question = {
-                            id: item.question_id,
-                            question: item.question,
-                            options: []
-                        };
-                        result.push(question);
-                    }
-                    question.options.push({
-                        text: item.option_text,
-                        is_correct: item.is_correct
-                    });
-                });
-                return result;
-            };
+            const token = localStorage.getItem("token");
+            const decoded = jwtDecode(token);
 
+            const response = await ApiData.post("/teachersQuiz", {
+                teacher_code: decoded.teacher_code,
+                teacher_name: decoded.teacher_name,
+            });
+
+            console.log("API Response:", response.data);
+
+            if (response.data.resultData) {
+                setCertificate(response.data.resultData);
+                setSubmitted(true);
+                return;
+            }
+
+            // Quiz data format 
             const formatted = formatQuizData(response.data.allData);
             setQuiz(formatted);
+
         } catch (err) {
-            console.error(err.message);
+            console.error("Quiz Error:", err.message);
         }
     };
 
@@ -68,7 +69,8 @@ export default function TeachersQuiz() {
         }));
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
+        //Score calculate 
         let total = 0;
         quiz.forEach((q) => {
             const correct = q.options.find(opt => opt.is_correct);
@@ -76,36 +78,86 @@ export default function TeachersQuiz() {
                 total++;
             }
         });
+
+        const status = total >= 7 ? "Pass" : "Fail";
         setScore(total);
-        setResultStatus(total == null ? "Panding" : total >= 7 ? "Pass" : "Fail");
-        // getQuizQuestions();
+        setResultStatus(status);
+        setSubmitted(true);
+
+        /// Result save
+        try {
+            const token = localStorage.getItem("token");
+            const decoded = jwtDecode(token);
+
+            const response = await ApiData.post("/teachersQuiz", {
+                teacher_code: decoded.teacher_code,
+                teacher_name: decoded.teacher_name,
+                score: total,
+                resultStatus: status,
+                attempt: 1,
+            });
+
+            if (response.data.resultData) {
+                setCertificate(response.data.resultData);
+            }
+        } catch (err) {
+            console.error("Submit Error:", err.message);
+        }
     };
-    console.log("quiz");
-    console.log(quizStatus);
-    console.log(Certificate);   
+
+    //  Certificate screen
+    if (submitted && certificate) {
+        return (
+            <div className="min-h-screen bg-gray-100 flex items-center justify-center p-6">
+                <div className="bg-white w-[600px] p-8 border-4 border-blue-500 rounded-xl shadow-lg text-center">
+                    <h1 className="text-3xl font-bold text-blue-600 mb-4">
+                        Certificate of Achievement
+                    </h1>
+                    <p className="text-gray-600 mb-2">This is to certify that</p>
+                    <h2 className="text-2xl font-semibold text-red-500 mb-4">
+                        {certificate.teacher_name || certificate.teacher_code}
+                    </h2>
+                    <p className="text-gray-600 mb-4">
+                        has successfully completed the Quiz
+                    </p>
+                    <p className="text-xl font-bold text-green-600 mb-6">
+                        Score: {certificate.score} / {quiz.length || 20}
+                    </p>
+                    <p className="text-lg font-bold text-yellow-500 mb-2">
+                        Result: {certificate.score >= 7 ? "✅ Pass" : "❌ Fail"}
+                    </p>
+                    <p className="text-lg text-gray-700">🎉 Congratulations!</p>
+                </div>
+            </div>
+        );
+    }
+
+    // Quiz screen
     return (
         <div className="min-h-screen bg-gray-100 p-6">
+            <h1 className="text-2xl font-bold text-center mb-6">Quiz Questions</h1>
 
-            <h1 className="text-2xl font-bold text-center mb-6">
-                Quiz Questions
-            </h1>
-            {quiz.length > 0 ?
-                <div className="space-y-4">
+            {quiz.length > 0 ? (
+                <div className="space-y-4 max-w-2xl mx-auto">
                     {quiz.map((q, index) => (
                         <div key={q.id} className="bg-white shadow-md rounded-xl p-5">
-
                             <h2 className="text-lg font-semibold mb-4">
                                 {index + 1}. {q.question}
                             </h2>
 
+                            {/* q.options use karo, q.option_text nahi */}
                             <div className="space-y-2">
-                                {q.options.map((opt, i) => (
+                                {q.options.map((opt) => (
                                     <label
-                                        key={i}
-                                        className={`flex items-center gap-2 p-2 cursor-pointer 
-                  ${score !== null && opt.is_correct ? "bg-green-100 border-green-500" : ""}
-                  ${score !== null && answers[q.id] === opt.text && !opt.is_correct ? "bg-red-100 border-red-400" : ""}
-                  hover:bg-gray-50`}
+                                        key={opt.id}
+                                        className={`flex items-center gap-2 p-2 rounded cursor-pointer border
+                                            ${score !== null && opt.is_correct
+                                                ? "bg-green-100 border-green-500"
+                                                : ""}
+                                            ${score !== null && answers[q.id] === opt.text && !opt.is_correct
+                                                ? "bg-red-100 border-red-400"
+                                                : ""}
+                                            hover:bg-gray-50`}
                                     >
                                         <input
                                             type="radio"
@@ -120,54 +172,28 @@ export default function TeachersQuiz() {
                                     </label>
                                 ))}
                             </div>
-
                         </div>
                     ))}
 
                     <div className="text-center">
                         <button
                             onClick={handleSubmit}
-                            disabled={resultStatus}
-                            className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600 ">
-                            {resultStatus ? "Submited Quiz" : "Submit Quiz"}
+                            disabled={score !== null}
+                            className="bg-blue-500 text-white px-6 py-2 rounded-lg mt-4 hover:bg-blue-600 disabled:opacity-50"
+                        >
+                            {score !== null ? "Submitted ✅" : "Submit Quiz"}
                         </button>
                     </div>
 
                     {score !== null && (
                         <h2 className="text-center text-xl font-bold mt-4">
-                            Score: {score} / {quiz.length}  Result: {score > 7 ? "Pass" : "Fail"}
+                            Score: {score} / {quiz.length} — Result: {score >= 7 ? "✅ Pass" : "❌ Fail"}
                         </h2>
                     )}
-
                 </div>
-
-                : <div className="bg-white w-[600px] p-8 border-4 border-blue-500 rounded-xl shadow-lg text-center mx-auto mt-10">
-
-                    <h1 className="text-3xl font-bold text-blue-600 mb-4">
-                        Certificate of Achievement
-                    </h1>
-
-                    <p className="text-gray-600 mb-6">
-                        This is to certify that
-                    </p>
-
-                    <h2 className="text-2xl font-semibold text-red-500 mb-4">
-                        {Certificate.teacher_code}
-                    </h2>
-
-                    <p className="text-gray-600 mb-4">
-                        has successfully completed the Quiz
-                    </p>
-
-                    <p className="text-xl font-bold text-green-600 mb-6">
-                        Score: {Certificate.score}/ 20
-                    </p>
-
-                    <p className="text-lg text-gray-700 mb-8">
-                        🎉 Congratulations!
-                    </p>
-
-                </div>}
+            ) : (
+                <p className="text-center text-gray-500">Loading questions...</p>
+            )}
         </div>
     );
 }
