@@ -90,7 +90,7 @@ npm run dev
 
 ## Live Demo
 
-Frontend: https://teacher-profile-dhalai.vercel.app
+Frontend: teacher-profile-dhalai.vercel.app
 
 
 ---
