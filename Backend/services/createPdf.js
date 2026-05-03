@@ -1,7 +1,8 @@
 import fs from "fs";
 import path from "path";
 import ejs from "ejs";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core";
+import chromium from "@sparticuz/chromium";
 
 const MOefilepath = path.join(process.cwd(), "public", "MOe_logo.png");
 const Nicfilepath = path.join(process.cwd(), "public", "nisi_logo.png");
@@ -18,10 +19,18 @@ export const createPdf = async (rowData, res) => {
         }
         const tamplatepath = path.join(process.cwd(), "EJSFiles", "pdfFile.ejs");
         const htmlcode = await ejs.renderFile(tamplatepath, { profilereportdata: profilereportdata, });
+
         const browser = await puppeteer.launch({
-            headless: "new",
-            args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage", "--disable-gpu"],
+            args: [
+                ...chromium.args,
+                "--no-sandbox",
+                "--disable-setuid-sandbox"
+            ],
+            defaultViewport: chromium.defaultViewport,
+            executablePath: await chromium.executablePath(),
+            headless: chromium.headless,
         });
+        
         const page = await browser.newPage();
         await page.setContent(htmlcode, { waitUntil: "domcontentloaded", });
         const profilereportDownlaodPdf = await page.pdf({

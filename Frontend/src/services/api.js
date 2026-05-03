@@ -1,24 +1,9 @@
-// import axios from "axios";
-
-//  export const ApiData=axios.create({
-//     baseURL:"http://localhost:3400",
-//     timeout: 120000,
-// })
-
-
 import axios from "axios";
-
 export const ApiData = axios.create({
    baseURL:"https://teacher-profile-dhalai.onrender.com",
+  // baseURL: import.meta.env.VITE_API_URL,
   timeout: 120000,
+  withCredentials: true,
 });
 
 
-// const baseURL =
-//   window.location.hostname === "localhost"
-//     ? "http://localhost:3400"
-//     : "https://teacher-profile-dhalai.onrender.com";
-
-// export const ApiData = axios.create({
-//   baseURL,
-// });

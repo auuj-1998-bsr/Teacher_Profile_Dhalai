@@ -1,29 +1,30 @@
-import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { jwtDecode } from "jwt-decode";
+import { faSchool,faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
-  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  console.log(token);
+  const decoded = jwtDecode(token);
 
-
-  //Logout function 
-  const handleLogout=()=>{
-    localStorage.removeItem("token");
-    navigate("/login");
-  }
   return (
-    <header className="h-14 bg-white-400 text-black flex items-center justify-between px-6">
-     <img src={`${import.meta.env.VITE_API_URL}/uploads/MOe_logo.png`}className="h-13 w-35" alt="" />
-      <h1 className="text-2xl font-semibold pl-10 ">
-       School Teacher Information
-      </h1>
+    <header className="h-16 bg-white/80 backdrop-blur-md border-b border-gray-200 flex items-center justify-between px-6 shadow-sm">
 
-      <button
-        onClick={handleLogout}
-        className="bg-gray-500 px-4 py-1 rounded hover:bg-red-600"
-      >
-        Logout
-      </button>
+      <div className="flex items-center gap-3">
+        <img
+          src={`${import.meta.env.VITE_API_URL}/uploads/MOe_logo.png`}
+          className="h-10 w-auto object-contain"
+          alt="Logo"
+        />
+        <h1 className="absolute left-1/2 transform -translate-x-1/2 text-xl font-semibold text-gray-900 ">
+          <FontAwesomeIcon icon={faSchool} className="text-blue-500" />
+          School Teacher Management
+        </h1>
+      </div>
+      <div className="flex items-center gap-4">
+        <span className="text-sm text-gray-600"> <FontAwesomeIcon icon={faUser} /> {decoded.teacher_name}</span>
+      </div>
     </header>
   );
 };
-
 export default Header;

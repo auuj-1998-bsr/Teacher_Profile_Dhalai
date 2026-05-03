@@ -3,7 +3,13 @@ import cors from "cors";
 import teacherRoutes from "./routes/teacherRoutes.js";
 import dotenv from "dotenv";
 dotenv.config();
+process.on("uncaughtException", (err) => {
+  console.error("UNCAUGHT EXCEPTION:", err);
+});
 
+process.on("unhandledRejection", (err) => {
+  console.error("UNHANDLED REJECTION:", err);
+});
 const app = express();
 const port = process.env.PORT || 3400;
 app.use(cors({

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState,useRef } from "react";
 import { ApiData } from "../services/api";
 import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,6 +7,7 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
     const [loading, setLoading] = useState();
     const [image, setImage] = useState(null);
     const [preview, setPreview] = useState();
+    const fileInputRef = useRef(null);
     const [teacherinfo, setTeacherinfo] = useState({
         academic_year: "",
         udise_code: "",
@@ -42,37 +43,34 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
         }
     }, [isOpen]);
 
+    const openFileSelector = () => {
+  fileInputRef.current.click();
+};
+
     const handleChange = (e) => {
         const { name, value, type, files } = e.target;
         if (type === "file") {
             const file = files[0];
             if (!file) return;
-
             if (file.size > 2 * 1024 * 1024) {
                 alert("Image must be less than 2MB");
                 return;
             }
-
-
-
             setImage(file);
-
             const previewUrl = URL.createObjectURL(file);
             setPreview(previewUrl);
-
             return;
         }
-
         setTeacherinfo(prev => ({
             ...prev,
             [name]: value
         }));
     };
+
     const handlesubmit = (event) => {
         event.preventDefault();
         updateTeacherinfo();
         setLoading("loading");
-        console.log(teacherinfo);
     }
 
     const updateTeacherinfo = async () => {
@@ -101,15 +99,14 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
     }
     if (!isOpen) return null;
     return (isOpen && (<div className="bg-white p-6 rounded-xl shadow-lg max-w-6xl w-full h-full">
-        <span className="flex justify-end cursor-pointer" title="Close" onClick={onClose}><FontAwesomeIcon icon={faCircleXmark} /></span>
+        <span className="flex justify-end cursor-pointer hover:caret-red-700" title="Close" onClick={onClose}><FontAwesomeIcon icon={faCircleXmark} /></span>
         <h2 className="text-2xl font-semibold text-gray-800">
             Teacher Complete Details Form
         </h2>
         <div> {preview && (<img src={preview} alt="Preview" className="h-30 w-25 object-cover border mt-2 rounded" />)}
-            <input type="file" name="image" id="image" accept="image/*" onChange={handleChange} />
-            <input type="file" name="aadhar" id="aadhar" accept="image/pdf*" onChange={handleChange} />
+            <input type="file" name="image" id="image" ref={fileInputRef}   onChange={handleChange}  accept="image/*" style={{display:"none"}}/>
         </div>
-
+        <button onClick={openFileSelector} className="cursor-pointer">{preview===`${import.meta.env.VITE_API_URL}/uploads/null`?"Upload Image":"Change Image"}</button>
         <Section title="School Details">
             <Input label="Academic Year" type="number" name="academic_year" value={teacherinfo.academic_year} onChange={handleChange} />
             <Input label="UDISE Code" type="text" minLength={11} maxLength={11} name="udise_code" value={teacherinfo.udise_code} onChange={handleChange} />
@@ -119,7 +116,6 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
             <Input label="School Category Code" type="text" minLength={4} maxLength={50} name="school_category_code" value={teacherinfo.school_category_code} onChange={handleChange} />
             <Input label="School Type" type="text" minLength={4} maxLength={50} name="school_type" value={teacherinfo.school_type} onChange={handleChange} />
         </Section>
-
         <Section title="Teacher Personal Details">
             <Input label="Teacher Name" type="text" minLength={4} maxLength={50} name="teacher_name" value={teacherinfo.teacher_name} onChange={handleChange} />
             <Input label="Gender" type="text" minLength={4} maxLength={50} name="gender" value={teacherinfo.gender} onChange={handleChange} />
@@ -128,7 +124,6 @@ export function TeacherView({ isOpen, onClose, rowdata }) {
             <Input label="Social Category" type="text" name="social_category" value={teacherinfo.social_category} onChange={handleChange} />
 
         </Section>
-
         <Section title="Qualification Details">
             <Input label="Highest Academic Qualification" type="text" minLength={10} maxLength={10} name="hig_qual_acad" value={teacherinfo.hig_qual_acad} onChange={handleChange} />
             <Input label="Trade" name="trade" type="text" maxLength={2} value={teacherinfo.trade} onChange={handleChange} />
